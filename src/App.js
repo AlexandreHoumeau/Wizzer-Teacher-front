@@ -3,14 +3,14 @@ import { Provider } from "react-redux";
 
 import "./index.css";
 import PublicRoute from "./routes/publicRoutes";
-import PrivateRoute from "./routes/privateRoutes";
+//import PrivateRoute from "./routes/privateRoutes";
 
 // PAGES
-import Login from "./pages/Auth/Login";
+//import Login from "./pages/Auth/Login";
 import Store from "store";
 import Register from "pages/Auth/Register";
 import { ToastContainer } from "react-toastify";
-import DashboardLayout from "pages/Dashboard";
+//import DashboardLayout from "pages/Dashboard";
 
 export default function App() {
   return (
@@ -18,33 +18,33 @@ export default function App() {
         <ToastContainer />
         <BrowserRouter>
           <Switch>
-            <PublicRoute restricted={false} component={Home} path="/" exact />
+{/*            <PublicRoute restricted={false} component={Home} path="/" exact />
             <PublicRoute
                 restricted={false}
                 component={Login}
                 path="/login"
                 exact
-            />
+            />*/}
             <PublicRoute
                 restricted={false}
                 component={Register}
                 path="/register"
                 exact
             />
-            <PublicRoute
+{/*            <PublicRoute
                 restricted={false}
                 component={Landing}
                 path="/landing"
                 exact
             />
-            <PrivateRoute component={DashboardLayout} path="/app" />
+            <PrivateRoute component={DashboardLayout} path="/app" />*/}
           </Switch>
         </BrowserRouter>
       </Provider>
   );
-}
+};
 
-const Home = () => (
+/*const Home = () => (
     <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
       <div className="flex-shrink-0">
         <img className="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo" />
@@ -54,4 +54,4 @@ const Home = () => (
         <p className="text-gray-500">You have a new message!</p>
       </div>
     </div>
-);
+);*/

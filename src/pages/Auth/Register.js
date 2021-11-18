@@ -6,4 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 import api from "services/api";
 import { useHistory } from "react-router";
 
+const Register = () => {
+    return(
+        <p>Register</p>
+    );
+}
 
+export default Register;
