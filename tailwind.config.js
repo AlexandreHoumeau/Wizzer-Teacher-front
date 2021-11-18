@@ -10,7 +10,7 @@ module.exports = {
         "-1": "-1"
       },
       borderRadius: {
-        '4xl': '36px'
+        '4xl': '40px'
       },
     },
     fontFamily: (theme) => ({
