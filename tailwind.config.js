@@ -16,6 +16,7 @@ module.exports = {
     fontFamily: (theme) => ({
       ...theme("font"),
       raleway: ["raleway", "sans-serif"],
+      DMSans: ["DM Sans", "sans-serif"],
     }),
     colors: {
       transparent: 'transparent',
