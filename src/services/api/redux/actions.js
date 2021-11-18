@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { API_DOMAIN, JWT_TOKEN } from 'config'
+import { API_DOMAIN, JWT_TOKEN } from '../../../config'
 import types from './types'
 
 const actions = {

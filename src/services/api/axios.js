@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { API_DOMAIN, JWT_TOKEN, I18N_LANGUAGE } from "config";
+import { API_DOMAIN, JWT_TOKEN, I18N_LANGUAGE } from "src/config";
 import { toast } from "react-toastify";
 import store from '../../store'
 

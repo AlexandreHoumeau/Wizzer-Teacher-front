@@ -7,8 +7,8 @@ import PublicRoute from "./routes/publicRoutes";
 
 // PAGES
 //import Login from "./pages/Auth/Login";
-import Store from "store";
-import Register from "pages/Auth/Register";
+import Store from "./store";
+import Register from "./pages/Auth/Register";
 import { ToastContainer } from "react-toastify";
 //import DashboardLayout from "pages/Dashboard";
 

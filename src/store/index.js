@@ -29,8 +29,8 @@ function configureStore() {
     Api: Api.reducer,
     Auth: authReducer,
     UI: uiReducer,
-    register: registerReducer,
-    search: searchReducer
+    //register: registerReducer,
+    //search: searchReducer
     // router: connectRouter(history)
   }))
   return store
