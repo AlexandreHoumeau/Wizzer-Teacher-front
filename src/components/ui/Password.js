@@ -17,7 +17,7 @@ const Password = ({ placeholder, error, value, label, icon, id, name, onChange, 
         </p>
         <div className="flex my-2 mb-2 items-center">
           <Icon className="w-6 h-6 mr-2" aria-hidden="true" icon={icon} />
-          <div className="flex justify-between w-full">
+          <div className="flex justify-between w-full items-center">
             <input
               id={id}
               name={name}

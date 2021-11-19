@@ -9,6 +9,7 @@ import PublicRoute from "./routes/publicRoutes";
 //import Login from "./pages/Auth/Login";
 import Store from "./store";
 import Register from "./pages/Auth/Register";
+import Login from "./pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 //import DashboardLayout from "pages/Dashboard";
 
@@ -18,13 +19,13 @@ export default function App() {
         <ToastContainer />
         <BrowserRouter>
           <Switch>
-{/*            <PublicRoute restricted={false} component={Home} path="/" exact />
+{/*            <PublicRoute restricted={false} component={Home} path="/" exact />*/}
             <PublicRoute
                 restricted={false}
                 component={Login}
                 path="/login"
                 exact
-            />*/}
+            />
             <PublicRoute
                 restricted={false}
                 component={Register}
