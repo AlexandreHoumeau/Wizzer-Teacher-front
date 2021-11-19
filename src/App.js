@@ -2,14 +2,15 @@ import { BrowserRouter, Switch } from "react-router-dom";
 
 import "./index.css";
 import PublicRoute from "./routes/publicRoutes";
-//import PrivateRoute from "./routes/privateRoutes";
+import PrivateRoute from "./routes/privateRoutes";
 
 // PAGES
 //import Login from "./pages/Auth/Login";
-import Register from "./pages/Auth/Register";
-import Login from "./pages/Auth/Login";
+import Register from "pages/Auth/Register";
+import Login from "pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DashboardLayout from "pages/Dashboard";
 
 const App = () => {
   return (
@@ -17,13 +18,13 @@ const App = () => {
       <ToastContainer />
       <BrowserRouter>
         <Switch>
-          {/*            <PublicRoute restricted={false} component={Home} path="/" exact />
-            <PublicRoute
-                restricted={false}
-                component={Login}
-                path="/login"
-                exact
-            />*/}
+          {/*            <PublicRoute restricted={false} component={Home} path="/" exact /> */}
+          <PublicRoute
+            restricted={false}
+            component={Login}
+            path="/login"
+            exact
+          />
           <PublicRoute
             restricted={false}
             component={Register}
@@ -35,8 +36,8 @@ const App = () => {
                 component={Landing}
                 path="/landing"
                 exact
-            />
-            <PrivateRoute component={DashboardLayout} path="/app" />*/}
+            />*/}
+            <PrivateRoute component={DashboardLayout} path="/app" />
         </Switch>
       </BrowserRouter>
     </>
