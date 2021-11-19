@@ -11,7 +11,7 @@ const Password = ({ placeholder, error, value, label, icon, id, name, onChange, 
 
   return (
     <>
-      <div className="border-b-2 border-grey-dark">
+      <div className="border-b-2 border-grey-dark mt-4">
         <p className=" font-raleway text-base text-grey-dark font-medium">
           {label}
         </p>
@@ -26,10 +26,10 @@ const Password = ({ placeholder, error, value, label, icon, id, name, onChange, 
               onBlur={onBlur}
               type={passwordVisibility}
               security
-              className="focus:outline-none font-raleway font-medium placeholder-grey-darker"
+              className="focus:outline-none font-raleway font-medium placeholder-grey-darker w-full"
               placeholder={placeholder}
             />
-            <Icons.EyeIcon onClick={() => {setPasswordVisibility(passwordVisibility === 'password' ? 'text' : 'password')}}/>
+            <Icons.EyeIcon className="cursor-pointer items-center" onClick={() => {setPasswordVisibility(passwordVisibility === 'password' ? 'text' : 'password')}}/>
           </div>
         </div>
       </div>
