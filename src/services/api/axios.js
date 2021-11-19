@@ -1,14 +1,16 @@
 import axios from "axios";
 
-import { API_DOMAIN, JWT_TOKEN } from "../../config";
+import { API_DOMAIN, JWT_TOKEN, I18N_LANGUAGE } from "../../config";
 import { toast } from "react-toastify";
 import store from '../../store'
 
 const apiAxios = axios.create();
 const authorization = localStorage.getItem(JWT_TOKEN);
+const locale = localStorage.getItem(I18N_LANGUAGE);
 
 apiAxios.defaults.baseURL = API_DOMAIN;
 apiAxios.defaults.headers.common["Authorization"] = `Bearer: ${authorization}`;
+apiAxios.defaults.headers.common["Accept-Language"] = locale;
 
 apiAxios.interceptors.request.use((config) => {
   const { dispatch } = store
@@ -60,12 +62,10 @@ apiAxios.interceptors.response.use(
     return data;
   },
   function (error) {
-    // const { dispatch } = store
-
-    // dispatch({
-    //   type: 'SET_AUTH_ERROR',
-    //   payload: error
-    // })
+    const { dispatch } = store
+    setTimeout(() => {
+      dispatch({ type: 'NO_LOADING' })
+    }, 300)
 
     if (error.response?.data?.$message) {
       toast.error(error.response?.data?.$message); 
