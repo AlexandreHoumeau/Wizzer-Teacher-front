@@ -1,7 +1,7 @@
 import React from "react";
 import * as Icons from "assets/icons";
 
-const Input = ({ placeholder, error, value, label, icon, id, name }) => {
+const Input = ({ placeholder, error, value, label, icon, id, name, onChange, onBlur }) => {
   function Icon({ icon, ...props }) {
     const Icon = Icons[icon];
     return <Icon {...props} />;
@@ -15,6 +15,8 @@ const Input = ({ placeholder, error, value, label, icon, id, name }) => {
           <Icon className="w-6 h-6 mr-2" aria-hidden="true" icon={icon} />
           <input
             name={name}
+            onChange={onChange}
+            onBlur={onBlur}
             id={id}
             value={value}
             className="focus:outline-none font-raleway font-medium placeholder-grey-darker"
