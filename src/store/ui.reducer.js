@@ -4,6 +4,7 @@ const initialState = {
 }
 
 export const uiReducer = (state = initialState, action) => {
+  console.log(action.type)
   switch (action.type) {
     case 'SET_ERRORS':
       return {
@@ -24,6 +25,12 @@ export const uiReducer = (state = initialState, action) => {
         ...state,
         isLoading: true
       }
+
+      case 'NO_LOADING':
+        return {
+          ...state,
+          isLoading: false
+        }
 
     default:
       return state
