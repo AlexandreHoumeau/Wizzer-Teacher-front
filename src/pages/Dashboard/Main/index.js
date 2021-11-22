@@ -8,8 +8,7 @@ const Main = ({ routes, isLoading }) => {
   return (
     <main className="h-full bg-purple-50 overflow-y-auto">
       <div className="relative grid">
-        {/* <Suspense fallback={<ThemedSuspense />} /> */}
-        <Loader isLoading={isLoading}/>
+        <Suspense fallback={<Loader isLoading={isLoading}/>} />
           <Switch>
             {routes.map((route, i) => {
               return route.component ? (

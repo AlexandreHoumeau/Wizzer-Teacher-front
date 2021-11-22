@@ -4,7 +4,6 @@ const initialState = {
 }
 
 export const uiReducer = (state = initialState, action) => {
-  console.log(action.type)
   switch (action.type) {
     case 'SET_ERRORS':
       return {
