@@ -4,18 +4,15 @@ import routes from "routes";
 import api from "services/api";
 import Main from "./Main";
 import {connect} from 'react-redux'
+import { getUserData } from "store/actions";
 
-const DashboardLayout = ({ children, setUser, Auth, ...rest }) => {
+const DashboardLayout = ({ getUserData, user}) => {
   useEffect(() => {
     fetchUser()
   }, [])
 
   const fetchUser = async () => {
-    await api.axios
-      .get('/v1/me')
-      .then((res) => {
-        setUser(res.person)
-      })
+    await getUserData()
   }
   return (
     <div className={`flex h-screen bg-gray-50 dark:bg-gray-900`}>
@@ -28,6 +25,6 @@ const DashboardLayout = ({ children, setUser, Auth, ...rest }) => {
 };
 
 const mapStateToProps = (state) => ({
-  Auth: state
+  user: state.Auth.user
 })
-export default connect(mapStateToProps, { setUser })(DashboardLayout);
+export default connect(mapStateToProps, { getUserData })(DashboardLayout);
