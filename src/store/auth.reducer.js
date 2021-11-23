@@ -30,7 +30,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        user: action.payload
+        user: action.payload,
       }
 
     case 'LOADING_USER':
