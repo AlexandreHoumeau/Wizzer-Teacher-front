@@ -2,7 +2,7 @@ import { lazy } from 'react'
 
 // use lazy for better code splitting, a.k.a. load faster
 const Home = lazy(() => import('../pages/Home'))
-// const MySpace = lazy(() => import('../pages/Myspace'))
+const AdminHome = lazy(() => import('../pages/Admin/Home/index'))
 // const Messenger = lazy(() => import('../pages/Messenger'))
 // const Settings = lazy(() => import('../pages/Settings'))
 // const Search = lazy(() => import('../pages/Home/Search'))
@@ -28,10 +28,11 @@ const routes = [
     path: '/home', // the url
     component: Home, // view rendered
   },
-  // {
-  //   path: '/space',
-  //   component: MySpace,
-  // },
+  {
+    path: '/admin/home',
+    component: AdminHome,
+    permssion: 'admin'
+  },
   // {
   //   path: '/messenger',
   //   component: Messenger,
