@@ -11,10 +11,12 @@ import Login from "pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DashboardLayout from "pages/Dashboard";
+import { Provider } from "react-redux";
+import Store from "./store";
 
-const App = () => {
+export default function App() {
   return (
-    <>
+    <Provider store={Store}>
       <ToastContainer />
       <BrowserRouter>
         <Switch>
@@ -40,8 +42,6 @@ const App = () => {
             <PrivateRoute component={DashboardLayout} path="/app" />
         </Switch>
       </BrowserRouter>
-    </>
+      </Provider>
   );
 };
-
-export default App;

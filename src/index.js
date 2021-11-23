@@ -3,19 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Provider } from "react-redux";
-import Store from "./store";
 import ThemedSuspense from "components/ui/ThemedSuspense";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={Store}>
     <Suspense fallback={<ThemedSuspense />}>
 
       <App />
       </Suspense>
 
-    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
