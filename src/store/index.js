@@ -12,14 +12,14 @@ export const history = createBrowserHistory()
 // const router = routerMiddleware(history)
 
 let createStoreWithMiddleware
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 if (process.env.NODE_ENV === 'production' || process.env.PLATFORM_ENV !== 'web') {
-  createStoreWithMiddleware = compose(
+  createStoreWithMiddleware = composeEnhancers(
     applyMiddleware(thunk),
     // applyMiddleware(router)
   )(createStore)
 } else {
-  createStoreWithMiddleware = compose(
+  createStoreWithMiddleware = composeEnhancers(
     applyMiddleware(thunk)
   )(createStore)
 }
