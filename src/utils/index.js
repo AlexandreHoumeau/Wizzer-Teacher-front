@@ -1,3 +1,4 @@
-import isLogin from "./isLogin";
+import { isLogin } from "./isLogin";
+import { hasRoles } from "./hasRoles";
 
-export default { isLogin }
+export default { isLogin, hasRoles }
