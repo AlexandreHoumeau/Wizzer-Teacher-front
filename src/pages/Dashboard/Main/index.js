@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Loader from "components/ui/Loader";
+import PrivateRoute from "routes/privateRoutes";
 
 const Main = ({ routes, isLoading }) => {
   return (
@@ -12,11 +13,13 @@ const Main = ({ routes, isLoading }) => {
           <Switch>
             {routes.map((route, i) => {
               return route.component ? (
-                <Route
+                <PrivateRoute
                   key={i}
                   exact={true}
                   path={`/app${route.path}`}
-                  render={(props) => <route.component {...props} />}
+                  roles={route.roles}
+                  component={route.component}
+                  // render={(props) => <route.component {...props} />}
                 />
               ) : null;
             })}
