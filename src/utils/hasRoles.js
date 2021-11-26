@@ -1,15 +1,15 @@
 import Store from '../store/index'
 
-const hasRoles = ({ roles }) => {
+const hasRoles = (roles) => {
   const { Auth } = Store.getState();
   
-  setTimeout(() => {
-    console.log(Auth.user)  
-  }, 3000)
   if (!roles?.length) {
     return true
   }
-  // if (roles.inclues())
+  if (roles.includes(Auth.user.type)) {
+    return true
+  }
+  return false
 }
 
 export default hasRoles
