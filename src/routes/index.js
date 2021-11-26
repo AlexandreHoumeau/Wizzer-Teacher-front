@@ -31,7 +31,7 @@ const routes = [
   {
     path: '/admin/home',
     component: AdminHome,
-    permssion: 'admin'
+    roles: ['admin']
   },
   // {
   //   path: '/messenger',
