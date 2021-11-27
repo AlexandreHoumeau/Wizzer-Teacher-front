@@ -6,6 +6,7 @@ import hasRoles from "utils/hasRoles";
 
 const PrivateRoute = ({ component: Component, roles, path, ...rest }) => {
   roles = roles || [];
+  
   return (
     <Route
       {...rest}
