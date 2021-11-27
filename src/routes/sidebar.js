@@ -7,24 +7,28 @@
  */
  const routes = [
   {
-    path: '/app/home', // the url
+    path: '/app/admin/home', // the url
     icon: 'HomeIcon', // the component being exported from icons/index.js
-    name: 'Accueil', // name that appear in Sidebar
+    name: 'Accueil', // name that appear in Sidebar,
+    permission: 'admin'
   },
   {
-    path: '/app/space',
+    path: '/app/admin/modules',
     icon: 'CalendarIcon',
-    name: 'Mon espace',
+    name: 'Modules',
+    permission: 'admin'
   },
   {
-    path: '/app/messenger',
+    path: '/app/admin/sessions',
     icon: 'MessengerIcon',
-    name: 'Ma messagerie',
+    name: 'Sessions',
+    permission: 'admin'
   },
   {
-    path: '/app/settings',
+    path: '/app/admin/user',
     icon: 'SettingsIcon',
-    name: 'Réglages',
+    name: 'Utilisateurs',
+    permission: 'admin'
   },
   // {
   //   path: '/app/buttons',
