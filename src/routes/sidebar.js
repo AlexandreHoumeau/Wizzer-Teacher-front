@@ -14,21 +14,27 @@
   },
   {
     path: '/app/admin/modules',
-    icon: 'CalendarIcon',
+    icon: 'ModulesIcon',
     name: 'Modules',
     permission: 'admin'
   },
   {
     path: '/app/admin/sessions',
-    icon: 'MessengerIcon',
+    icon: 'SessionsIcon',
     name: 'Sessions',
     permission: 'admin'
   },
   {
     path: '/app/admin/user',
-    icon: 'SettingsIcon',
+    icon: 'UsersIcon',
     name: 'Utilisateurs',
     permission: 'admin'
+  },
+  {
+    path: '/app/admin/s',
+    icon: 'UsersIcon',
+    name: 'Hello World',
+    permission: 'user'
   },
   // {
   //   path: '/app/buttons',
