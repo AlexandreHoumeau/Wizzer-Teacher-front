@@ -17,6 +17,8 @@ import { ReactComponent as RightArrowIcon } from './right-arrow.svg'
 import { ReactComponent as StatisticsIcon } from './statistics.svg'
 import { ReactComponent as SucessIcon } from './success.svg'
 import { ReactComponent as WaitingIcon } from './waiting.svg'
+import { ReactComponent as SessionsIcon } from './sessionsIcon.svg'
+import { ReactComponent as UsersIcon } from './usersIcon.svg'
 
 export {
   MailIcon,
@@ -36,5 +38,7 @@ export {
   RightArrowIcon,
   StatisticsIcon,
   SucessIcon,
-  WaitingIcon
+  WaitingIcon,
+  SessionsIcon,
+  UsersIcon
 }
