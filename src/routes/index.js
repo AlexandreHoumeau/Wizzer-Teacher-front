@@ -3,7 +3,8 @@ import { lazy } from 'react'
 // use lazy for better code splitting, a.k.a. load faster
 const Home = lazy(() => import('../pages/Home'))
 const AdminHome = lazy(() => import('../pages/Admin/Home/index'))
-// const Messenger = lazy(() => import('../pages/Messenger'))
+const Modules = lazy(() => import('../pages/Admin/Modules'))
+const NewModule = lazy(() => import('../pages/Admin/Modules/NewModules'))
 // const Settings = lazy(() => import('../pages/Settings'))
 // const Search = lazy(() => import('../pages/Home/Search'))
 // const TeacherOverview = lazy(() => import('../pages/Home/TeacherOverview'))
@@ -33,10 +34,16 @@ const routes = [
     component: AdminHome,
     roles: ['admin']
   },
-  // {
-  //   path: '/messenger',
-  //   component: Messenger,
-  // },
+  {
+    path: '/admin/modules/new',
+    component: NewModule,
+    roles: ['admin']
+  },
+  {
+    path: '/admin/modules',
+    component: Modules,
+    roles: ['admin']
+  },
   // {
   //   path: '/settings',
   //   component: Settings,
