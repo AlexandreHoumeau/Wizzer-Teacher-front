@@ -44,7 +44,6 @@ const Nav = ({ user }) => {
                 <div className="lg:flex hidden">
                   {navigationList.map((route) => (
                     <NavLink
-                      exact
                       to={route.path}
                       className={(isActive) =>
                         "flex items-center mr-12 text-base font-semibold font-raleway py-8 transition-colors duration-300 border-b " +
