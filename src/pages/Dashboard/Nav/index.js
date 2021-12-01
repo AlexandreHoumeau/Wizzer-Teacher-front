@@ -26,13 +26,13 @@ const Nav = ({ user }) => {
           <div className=" md:px-2 lg:px-16 xl:px-36">
             <div className="">
               <div className="flex justify-between items-center">
-                <div class="block lg:hidden py-8 pl-4">
+                <div className="block lg:hidden py-8 pl-4">
                   <button
                     onClick={() => setShowMenu(!showMenu)}
-                    class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+                    className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
                   >
                     <svg
-                      class="fill-current h-3 w-3"
+                      className="fill-current h-3 w-3"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -44,6 +44,7 @@ const Nav = ({ user }) => {
                 <div className="lg:flex hidden">
                   {navigationList.map((route) => (
                     <NavLink
+                      key={route.path}
                       to={route.path}
                       className={(isActive) =>
                         "flex items-center mr-12 text-base font-semibold font-raleway py-8 transition-colors duration-300 border-b " +
@@ -90,6 +91,7 @@ const Nav = ({ user }) => {
           {navigationList.map((route) => (
             <NavLink
               exact
+              key={route.path}
               to={route.path}
               onClick={() => setShowMenu(false)}
               className={(isActive) =>
