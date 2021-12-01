@@ -12,7 +12,7 @@ const Input = ({ placeholder, error, value, label, icon, id, name, onChange, onB
       <div className="border-b-2 border-grey-dark mt-4">
         <p className=" font-raleway text-base text-grey-dark font-medium">{label}</p>
         <div className="flex my-2 mb-2 items-center">
-          <Icon className="w-6 h-6 mr-2" aria-hidden="true" icon={icon} />
+          {icon && ( <Icon className="w-6 h-6 mr-2" aria-hidden="true" icon={icon} /> )}
           <input
             name={name}
             onChange={onChange}
