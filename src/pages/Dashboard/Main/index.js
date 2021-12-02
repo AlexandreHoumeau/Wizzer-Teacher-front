@@ -8,8 +8,8 @@ import PrivateRoute from "routes/privateRoutes";
 
 const Main = ({ routes, isLoading }) => {
   return (
-    <main className="h-full">
-      <div className="relative px-36 py-12">
+    <main className="h-full bg-white">
+      <div className="relative px-2 md:px-16 lg:px-36 py-12">
         <Suspense fallback={<Loader isLoading={isLoading}/>} />
           <Switch>
             {routes.map((route, i) => {
