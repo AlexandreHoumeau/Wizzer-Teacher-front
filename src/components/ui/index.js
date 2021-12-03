@@ -5,6 +5,7 @@ import Password from './Password'
 import Tag from './Tag'
 import TagCourse from './TagCourse'
 import ThemedSuspense from './ThemedSuspense'
+import Table from './Table'
 
 export { 
   Button,
@@ -13,5 +14,6 @@ export { 
   Password,
   Tag,
   ThemedSuspense,
-  TagCourse
+  TagCourse,
+  Table
 }
