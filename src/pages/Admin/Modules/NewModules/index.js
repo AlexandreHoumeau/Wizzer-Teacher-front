@@ -1,21 +1,21 @@
 import React from "react";
-import { Table, Button } from "components/ui"
+import { Table, Input } from "components/ui";
 import { useState } from "react";
 
 const NewModule = () => {
-
   const dataSource = [
-    {
-      key: '1',
-      title: 'Mike',
-      points: 32,
-      status: '10 Downing Street',
-    },
+    // {
+    //   key: '1',
+    //   title: 'Mike',
+    //   points: 32,
+    //   status: '10 Downing Street',
+    // },
     // {
     //   key: '2',
-    //   name: 'John',
-    //   age: 42,
-    //   address: '10 Downing Street',
+    //   title: 'John',
+    //   points: 42,
+    //   status: '10 Downing Street',
+    //   battle: '10 Downing Street',
     // },
   ];
 
@@ -47,15 +47,23 @@ const NewModule = () => {
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="flex justify-between mb-10">
-            <div className="text-left font-raleway font-bold text-2xl mb-5">Ajouter un module</div>
-            <div className="border-2 border-grey-dark cursor-pointer py-3 px-4 rounded-md">
-              
-              <div className="text-gray-400 font-bold">Ajouter un cours</div>
+            <div className="text-left font-raleway font-bold text-2xl mb-5">
+              Créer un module
             </div>
           </div>
         </div>
       </div>
 
+      <div className="w-2/3 mb-10">
+        <Input label="Titre du module" placeholder="Taper ici" />
+        <Input label="Petite descritpion du module" placeholder="Taper ici" />
+      </div>
+
+      <div className="flex justify-end mb-5">
+        <div className="border-2 border-grey-dark cursor-pointer py-3 px-4 rounded-md">
+          <div className="text-gray-400 font-bold">+ Ajouter un cours</div>
+        </div>
+      </div>
       <Table dataSource={dataSource} columns={columns} />
     </div>
   );
