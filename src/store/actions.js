@@ -1,5 +1,6 @@
 import { JWT_TOKEN } from '../config'
 import Api from 'services/api'
+import { useHistory } from 'react-router'
 
 export const loginUser = (userData, from = null) => async (dispatch) => {
   try {
@@ -20,11 +21,10 @@ export const loginUser = (userData, from = null) => async (dispatch) => {
 }
 
 export const getUserData = (from = null) => async (dispatch) => {
-  try {
+  try {    
     dispatch({ type: 'LOADING_USER' })
 
     const { person } = await Api.axios.get('v1/me')
-    
     dispatch({
       type: 'SET_USER',
       payload: person
