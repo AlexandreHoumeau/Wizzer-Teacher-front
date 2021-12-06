@@ -20,7 +20,6 @@ export default function App() {
       <ToastContainer />
       <BrowserRouter>
         <Switch>
-          {/*            <PublicRoute restricted={false} component={Home} path="/" exact /> */}
           <PublicRoute
             restricted={false}
             component={Login}
@@ -33,12 +32,6 @@ export default function App() {
             path="/register"
             exact
           />
-          {/*            <PublicRoute
-                restricted={false}
-                component={Landing}
-                path="/landing"
-                exact
-            />*/}
             <PrivateRoute component={DashboardLayout} path="/app" />
         </Switch>
       </BrowserRouter>
