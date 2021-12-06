@@ -67,20 +67,20 @@ export default function Table({ columns, loading, dataSource, ...props }) {
   return (
     <>
       {loading ? (
-        <div className="bg-white absolute z-10 rounded inset-0 flex items-center justify-center">
+        <div className="bg-white absolute z-10 rounded-3xl inset-0 flex items-center justify-center">
           <div>Loading ...</div>
         </div>
       ) : (
-        <div className="overflow-x-auto flex flex-col text-left shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <div className="overflow-x-auto bg-white flex flex-col text-left shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
           <table className="table-fix w-full">
-            <thead className="text-xs bg-grey-light uppercase border-b border-slate-200">
+            <thead className="text-xs bg-primary-light uppercase border-b border-slate-200">
               <tr>
                 {columns.map((column) => (
                   <th
                     className="text-left py-5 px-3 text-slate-600 text-xs"
                     key={column.key}
                   >
-                    <div className="text-gray-500 text-sm font-raleway font-bold">
+                    <div className=" text-grey-dark text-sm font-raleway font-bold">
                       {column.title}
                       {/* {column.sorter && (
                           <ChevronDownIcon color={sorting.current === column.key && sorting.type ? 'blue' : ''} className={`${sorting.current === column.key && sorting.type === 'desc' ? 'transform rotate-180' : ''
@@ -97,7 +97,7 @@ export default function Table({ columns, loading, dataSource, ...props }) {
                 <div>Loading...</div>
               </div>
             ) : (
-              <tbody className="w-full">
+              <tbody className="w-full bg-white">
                 {datas?.map((data) => (
                   <tr className="border-b border-slate-200" key={data.key}>
                     {Object.keys(data).map((key, index) => {
