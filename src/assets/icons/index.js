@@ -19,7 +19,8 @@ import { ReactComponent as SucessIcon } from './success.svg'
 import { ReactComponent as WaitingIcon } from './waiting.svg'
 import { ReactComponent as SessionsIcon } from './sessionsIcon.svg'
 import { ReactComponent as UsersIcon } from './usersIcon.svg'
-
+import { ReactComponent as ErrorIcon } from './error.svg'
+import { ReactComponent as SuccesIcon } from './success.svg'
 export {
   MailIcon,
   EyeIcon,
@@ -40,5 +41,7 @@ export {
   SucessIcon,
   WaitingIcon,
   SessionsIcon,
-  UsersIcon
+  UsersIcon,
+  ErrorIcon,
+  SuccesIcon
 }
