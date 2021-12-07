@@ -56,7 +56,7 @@ apiAxios.interceptors.response.use(
     }
 
     if ($message) {
-      console.log($message);
+      toast.success($message); 
     }
 
     return data;
@@ -69,6 +69,10 @@ apiAxios.interceptors.response.use(
 
     if (error.response?.data?.$message) {
       toast.error(error.response?.data?.$message); 
+    }
+
+    if (error.response?.data?.$message?.message) {
+      toast.error(error.response?.data?.$message.message); 
     }
   }
 );
