@@ -11,6 +11,7 @@ const Main = ({ routes, isLoading }) => {
     <main className="h-full bg-white">
       <div className="relative px-2 md:px-16 lg:px-36 py-12">
         <Suspense fallback={<Loader isLoading={isLoading}/>} />
+        <Loader isLoading={isLoading}/>
           <Switch>
             {routes.map((route, i) => {
               return route.component ? (
