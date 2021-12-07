@@ -1,7 +1,6 @@
 import Store from '../store/index'
 
 const hasRoles = (roles) => {
-  console.log('HELLO WORLD')
   const { Auth } = Store.getState();
   
   if (!roles?.length) {
