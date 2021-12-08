@@ -5,6 +5,8 @@ const Home = lazy(() => import('../pages/Home'))
 const AdminHome = lazy(() => import('../pages/Admin/Home/index'))
 const Modules = lazy(() => import('../pages/Admin/Modules'))
 const NewModule = lazy(() => import('../pages/Admin/Modules/NewModules'))
+const ModuleOverview = lazy(() => import('pages/Admin/Modules/Module')) 
+const NewCourse = lazy(() => import('pages/Admin/Modules/Module/New')) 
 // const Settings = lazy(() => import('../pages/Settings'))
 // const Search = lazy(() => import('../pages/Home/Search'))
 // const TeacherOverview = lazy(() => import('../pages/Home/TeacherOverview'))
@@ -42,6 +44,16 @@ const routes = [
   {
     path: '/admin/modules',
     component: Modules,
+    roles: ['admin']
+  },
+  {
+    path: '/admin/modules/:id',
+    component: ModuleOverview,
+    roles: ['admin']
+  },
+  {
+    path: '/admin/modules/:id/new',
+    component: NewCourse,
     roles: ['admin']
   },
   // {
