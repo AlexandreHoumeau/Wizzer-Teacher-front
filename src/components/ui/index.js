@@ -6,9 +6,11 @@ import Tag from './Tag'
 import TagCourse from './TagCourse'
 import ThemedSuspense from './ThemedSuspense'
 import Table from './Table'
+import CardModule from './CardModule'
 
 export { 
   Button,
+  CardModule,
   Input,
   Loader,
   Password,
