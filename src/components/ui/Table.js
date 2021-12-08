@@ -73,7 +73,7 @@ export default function Table({ columns, loading, dataSource, ...props }) {
       ) : (
         <div className="overflow-x-auto bg-white flex flex-col text-left shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
           <table className="table-fix w-full">
-            <thead className="text-xs bg-primary-light uppercase border-b border-slate-200">
+            <thead className="text-xs bg-grey-light uppercase border-b border-slate-200">
               <tr>
                 {columns.map((column) => (
                   <th
