@@ -23,6 +23,7 @@ module.exports = {
         primary: {
           DEFAULT: "#1F4CEC",
           light: "#ECF0FD",
+          disabled: '#BBC9F9'
         },
         yellow: {
           DEFAULT: "#ECC61D",
