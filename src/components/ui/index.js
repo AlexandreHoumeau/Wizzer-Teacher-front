@@ -7,6 +7,7 @@ import TagCourse from './TagCourse'
 import ThemedSuspense from './ThemedSuspense'
 import Table from './Table'
 import CardModule from './CardModule'
+import Select from './select'
 
 export { 
   Button,
@@ -17,5 +18,6 @@ export { 
   Tag,
   ThemedSuspense,
   TagCourse,
-  Table
+  Table,
+  Select,
 }

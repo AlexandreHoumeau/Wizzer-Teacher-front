@@ -9,7 +9,7 @@ const Input = ({ placeholder, error, value, label, icon, id, name, onChange, onB
 
   return (
     <>
-      <div className="border-b-2 border-grey-dark mt-4">
+      <div className="border-b-2 border-grey-dark">
         <p className=" font-raleway text-base text-grey-dark font-medium">{label}</p>
         <div className="flex my-2 mb-2 items-center">
           {icon && ( <Icon className="w-6 h-6 mr-2" aria-hidden="true" icon={icon} /> )}
@@ -19,7 +19,7 @@ const Input = ({ placeholder, error, value, label, icon, id, name, onChange, onB
             onBlur={onBlur}
             id={id}
             value={value}
-            className="focus:outline-none font-raleway font-medium placeholder-grey-darker w-full"
+            className="focus:outline-none font-raleway bg-transparent font-medium placeholder-grey-darker w-full"
             placeholder={placeholder}
           />
         </div>
