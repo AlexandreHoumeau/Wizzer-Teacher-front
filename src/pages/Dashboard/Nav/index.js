@@ -19,6 +19,8 @@ const Nav = ({ user }) => {
     const array = routes.filter((item) => item.permission === user.type);
     setNavigationList(array);
   }, [user]);
+
+  
   return (
     <div className="relative">
       {navigationList.length > 0 && (
