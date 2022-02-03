@@ -1,4 +1,4 @@
-import { Button, Table } from "components/ui";
+import { Button, Table, Tag, TagCourse } from "components/ui";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import api from "services/api";
@@ -15,9 +15,14 @@ const columns = [
     key: "points",
   },
   {
-    title: "Statut",
-    dataIndex: "status",
-    key: "status",
+    title: "Difficulté",
+    dataIndex: "difficulty",
+    key: "difficulty",
+    render: (value) => (
+      <div className="flex">
+      <TagCourse type={value} />
+      </div>
+    )
   },
   {
     title: "Battle",
@@ -26,39 +31,25 @@ const columns = [
   },
 ];
 
-// const dataSource = [
-// {
-//   key: "1",
-//   title: "Mike",
-//   points: 32,
-//   status: "10 Downing Street",
-// },
-// {
-//   key: "2",
-//   title: "John",
-//   points: 42,
-//   status: "10 Downing Street",
-//   battle: "10 Downing Street",
-// },
-// ];
-
 const ModuleOverview = () => {
-  const [module, setModule] = useState()
-  const [moduleID, setModuleID] = useState()
-  const history = useHistory()
+  const [module, setModule] = useState();
+  const [moduleID, setModuleID] = useState();
+  const history = useHistory();
+  const [exercices, setExercices] = useState([]);
 
   const fetchModule = async () => {
-    const data = await api.axios.get(
-      `/v1/modules/${moduleID}`
-    );
-    if (data) {
-      setModule(data.module);
+    if (moduleID) {
+      const data = await api.axios.get(`/v1/modules/${moduleID}`);
+      if (data) {
+        setModule(data.modules);
+        setExercices(data._exercices);
+      }
     }
   };
-  
+
   useEffect(() => {
-    setModuleID( window.location.pathname.split("/").pop())
-  }, [])
+    setModuleID(window.location.pathname.split("/").pop());
+  }, []);
 
   useEffect(() => {
     fetchModule();
@@ -68,9 +59,19 @@ const ModuleOverview = () => {
     <div>
       <div className="mb-10 flex items-center justify-between">
         <div className="font-raleway font-bold text-3xl">{module?.title}</div>
-        <Button text="Créer un cours" action={() => history.push(`/app/admin/modules/${window.location.pathname.split("/").pop()}/new`)} type="primary" />
+        <Button
+          text="Créer un cours"
+          action={() =>
+            history.push(
+              `/app/admin/modules/${window.location.pathname
+                .split("/")
+                .pop()}/new`
+            )
+          }
+          type="primary"
+        />
       </div>
-      <Table dataSource={module?._exercices || []} columns={columns} />
+      {module && <Table dataSource={exercices} columns={columns} />}
     </div>
   );
 };
