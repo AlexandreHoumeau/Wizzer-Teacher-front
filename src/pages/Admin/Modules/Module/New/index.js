@@ -3,6 +3,8 @@ import { Button, Input, Select } from "components/ui";
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useHistory } from "react-router";
+import api from "services/api";
 
 const difficulties = [
   { value: "easy", title: "Facile" },
@@ -26,13 +28,30 @@ const modules = {
 };
 
 const NewCourse = () => {
+  const history = useHistory()
+
   const [exo, setExo] = useState("");
   const [course, setCourse] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [title, setTitle] = useState("");
+  const [moduleID, setModuleID] = useState(null)
 
-  const submit = () => {
-    
+  useEffect(() => {
+    const path = window.location.pathname.split("/")
+    setModuleID(path[path.length - 2])
+  }, [])
+  const submit = async () => {
+    const data = await api.axios.post('/v1/exercices', {
+      title,
+      exercice: exo,
+      difficulty,
+      course,
+      moduleID
+    })
+    if (data?.$success) {
+      console.log('Hello World')
+      history.goBack()
+    }
   }
 
   return (
@@ -96,6 +115,7 @@ const NewCourse = () => {
 
         <div className="flex justify-center mt-10">
           <Button
+            action={submit}
             disabled={!exo || !course || !difficulty || !title}
             text="Enregistrer le cours"
             type="primary"
