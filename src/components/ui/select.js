@@ -1,14 +1,14 @@
 import React from "react";
 
-const Select = ({ action, label, placeholder, values}) => {
-
+const Select = ({ action, label, placeholder, values, value }) => {
   return (
     <label className="block border-b-2  border-grey-dark text-left">
       <p className=" font-raleway text-base text-grey-dark font-medium">
         {label}
       </p>
       <select
-        value={module.type}
+        value={value || module.type}
+        defaultValue={value}
         onChange={(e) => {
           action(e.target.value);
         }}
@@ -17,9 +17,17 @@ const Select = ({ action, label, placeholder, values}) => {
         <option selected disabled>
           {placeholder}
         </option>
-        {values.map((value) => (
-          <option key={value.value} value={value.value}>{value.title}</option>
-        ))}
+        {typeof values[0] === "object"
+          ? values.map((value) => (
+              <option key={value.value} value={value.value}>
+                {value.title}
+              </option>
+            ))
+          : values.map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
       </select>
     </label>
   );
