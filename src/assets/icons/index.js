@@ -21,6 +21,7 @@ import { ReactComponent as SessionsIcon } from './sessionsIcon.svg'
 import { ReactComponent as UsersIcon } from './usersIcon.svg'
 import { ReactComponent as ErrorIcon } from './error.svg'
 import { ReactComponent as SuccesIcon } from './success.svg'
+import { ReactComponent as PencilIcon } from './pencil.svg'
 export {
   MailIcon,
   EyeIcon,
@@ -43,5 +44,6 @@ export {
   SessionsIcon,
   UsersIcon,
   ErrorIcon,
-  SuccesIcon
+  SuccesIcon,
+  PencilIcon
 }
