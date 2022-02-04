@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
 import { ExerciceIcon } from "assets/icons";
 import { Button, Input, Select } from "components/ui";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { useHistory } from "react-router";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import ReactQuill, { Quill } from "react-quill";
+import { useParams } from "react-router-dom";
 import api from "services/api";
+import { useHistory } from "react-router";
+import "react-quill/dist/quill.snow.css";
 
 const difficulties = [
   { value: "easy", title: "Facile" },
   { value: "medium", title: "Moyen" },
   { value: "hard", title: "Difficile" },
 ];
+
+const arrayPoints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const modules = {
   toolbar: [
@@ -27,43 +32,39 @@ const modules = {
   ],
 };
 
-const arrayPoints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const Edit = () => {
+  let { exerciceId, id } = useParams();
+  const history = useHistory()
 
-const NewCourse = () => {
-  const history = useHistory();
-  const [exo, setExo] = useState("");
-  const [course, setCourse] = useState("");
-  const [difficulty, setDifficulty] = useState("");
-  const [points, setPoints] = useState("");
-  const [title, setTitle] = useState("");
-  const [moduleID, setModuleID] = useState(null);
+  const [exercice, setExercice] = useState();
 
-  useEffect(() => {
-    const path = window.location.pathname.split("/");
-    setModuleID(path[path.length - 2]);
-  }, []);
+  const fetchCourse = async () => {
+    const data = await api.axios.get(`/v1/exercices/${exerciceId}`);
+
+    if (data?.exercice) {
+      setExercice(data.exercice);   
+    }
+  };
 
   const submit = async () => {
-    const data = await api.axios.post("/v1/exercices", {
-      title,
-      exercice: exo,
-      difficulty,
-      course,
-      moduleID,
-      points,
+    const data = await api.axios.put("/v1/exercices", {
+      exercice,
+      exerciceId
     });
     if (data?.$success) {
-      console.log("Hello World");
       history.goBack();
     }
   };
 
+  useEffect(() => {
+    fetchCourse();
+  }, [exerciceId]);
+
   return (
     <div>
       <div className="mb-10 flex items-center justify-between">
-        <div className="font-raleway font-bold text-3xl">Créer un cours</div>
+        <div className="font-raleway font-bold text-3xl">Modifier le cours</div>
       </div>
-
       <div>
         <div className="text-2xl font-bold mb-4">
           Les informations sur le cours
@@ -72,16 +73,16 @@ const NewCourse = () => {
           <div className="grid grid-cols-8 space-x-8">
             <div className="col-span-4">
               <Input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={exercice?.title}
+                onChange={(e) => setExercice({...exercice, title: e.target.value})}
                 label="Titre du cours"
                 placeholder="Titre"
               />
             </div>
             <div className="col-span-2">
               <Select
-                action={(value) => setPoints(value)}
-                value={points}
+                action={(value) => setExercice({...exercice, points: value})}
+                value={exercice?.points}
                 label="Points de l'exercice"
                 values={arrayPoints}
                 placeholder="Points"
@@ -89,8 +90,8 @@ const NewCourse = () => {
             </div>
             <div className="col-span-2">
               <Select
-                action={(value) => setDifficulty(value)}
-                value={difficulty}
+                action={(value) => setExercice({...exercice, difficulty: value})}
+                value={exercice?.difficulty}
                 label="Difficulté"
                 values={difficulties}
                 placeholder="Type de difficulté"
@@ -109,8 +110,8 @@ const NewCourse = () => {
             </div>
             <div className="col-span-11">
               <Input
-                value={course}
-                onChange={(e) => setCourse(e.target.value)}
+                value={exercice?.course}
+                onChange={(e) => setExercice({...exercice, course: e.target.value})}
                 label="Lien du cours"
                 placeholder="Lien"
               />
@@ -121,18 +122,17 @@ const NewCourse = () => {
         <div className="text-2xl mt-8 font-bold mb-4">L'exercice</div>
         <div className="bg-grey-light rounded-2xl p-8">
           <ReactQuill
-            value={exo}
+            value={exercice?.exercice || ''}
             modules={modules}
             className="bg-white rounded-2xl"
-            onChange={setExo}
+            onChange={(value) => setExercice({...exercice, exercice: value})}
           />
         </div>
 
         <div className="flex justify-center mt-10">
           <Button
             action={submit}
-            disabled={!exo || !course || !difficulty || !title}
-            text="Enregistrer le cours"
+            text="Modifier le cours"
             type="primary"
           />
         </div>
@@ -141,4 +141,4 @@ const NewCourse = () => {
   );
 };
 
-export default NewCourse;
+export default Edit;
