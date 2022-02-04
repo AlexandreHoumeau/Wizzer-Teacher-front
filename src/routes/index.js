@@ -7,6 +7,7 @@ const Modules = lazy(() => import('../pages/Admin/Modules'))
 const NewModule = lazy(() => import('../pages/Admin/Modules/NewModules'))
 const ModuleOverview = lazy(() => import('pages/Admin/Modules/Module')) 
 const NewCourse = lazy(() => import('pages/Admin/Modules/Module/New')) 
+const EditCourse = lazy(() => import('pages/Admin/Modules/Module/Edit')) 
 // const Settings = lazy(() => import('../pages/Settings'))
 // const Search = lazy(() => import('../pages/Home/Search'))
 // const TeacherOverview = lazy(() => import('../pages/Home/TeacherOverview'))
@@ -54,6 +55,11 @@ const routes = [
   {
     path: '/admin/modules/:id/new',
     component: NewCourse,
+    roles: ['admin']
+  },
+  {
+    path: '/admin/modules/:id/edit/:exerciceId',
+    component: EditCourse,
     roles: ['admin']
   },
   // {
