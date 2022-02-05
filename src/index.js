@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ThemedSuspense from "components/ui/ThemedSuspense";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback={<ThemedSuspense />}>
-
+    <DndProvider backend={HTML5Backend}>
       <App />
+    </DndProvider>
       </Suspense>
 
   </React.StrictMode>,
