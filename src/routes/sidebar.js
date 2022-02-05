@@ -19,7 +19,7 @@
     permission: 'admin'
   },
   {
-    path: '/app/admin/sessions',
+    path: '/app/admin/session',
     icon: 'SessionsIcon',
     name: 'Sessions',
     permission: 'admin'
