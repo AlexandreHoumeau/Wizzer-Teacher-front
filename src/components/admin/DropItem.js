@@ -16,10 +16,6 @@ const DropItem = ({ index, addCourse, courses, removeCourse }) => {
     }),
   }));
 
-  useEffect(() => {
-    console.log(courses);
-  }, [courses]);
-
   return (
     <div
       ref={drop}
