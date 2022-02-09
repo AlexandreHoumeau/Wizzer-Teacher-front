@@ -16,6 +16,8 @@ const Session = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [days, setDays] = useState([]);
+  const [fetchedDays, setFetchedDays] = useState([]);
+  const [fetchedId, setFetchedId] = useState();
 
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -30,39 +32,71 @@ const Session = () => {
     }
   };
 
+  const fetchSession = async () => {
+    const data = await api.axios.get("v1/session");
+    if (data?.session?.days) {
+      console.log(data);
+      setFetchedId(data.session._id);
+      setFetchedDays(data.session.days);
+      setStartDate(new Date(data.startAt));
+      setEndDate(new Date(data.endAt));
+    }
+  };
+
   const handleSubmit = async () => {
-    await api.axios.post('v1/session', { days })
-  }
+    if (fetchedDays) {
+      const values = {
+        days,
+        sessionId: fetchedId,
+      };
+      await api.axios.put("v1/session", values);
+    } else {
+      await api.axios.post("v1/session", { days });
+    }
+  };
 
   const removeCourse = (item, index) => {
-    console.log(item)
-    let tmp = [...days]
-    tmp[index].courses = days[index].courses.filter((course) => course._id !== item._id)
-    setDays(tmp)
-  }
+    let tmp = [...days];
+    tmp[index]._exercices = days[index]._exercices.filter(
+      (course) => course._id !== item._id
+    );
+    setDays(tmp);
+  };
 
   const addCourse = (data, index) => {
-    if (!days[index].courses.find((course) => course._id === data._id)) {
-      days[index].courses.push(data);
+    if (!days[index]._exercices.find((course) => course._id === data._id)) {
+      days[index]._exercices.push(data);
     }
   };
 
   useEffect(() => {
     fetchExercices();
+    fetchSession();
   }, []);
 
   useEffect(() => {
     if (endDate && startDate) {
-      const diffDays = differenceInDays(endDate, startDate);
-      const array = [];
-      if (diffDays > 0) {
-        for (let dayIndex = 0; dayIndex <= diffDays; dayIndex++) {
-          const currentDay = add(startOfDay(startDate), { days: dayIndex });
-          array.push({ currentDay });
-          array[dayIndex].courses = [];
+      if (fetchedDays) {
+        const tmp = [];
+        fetchedDays.map((days) => {
+          tmp.push({
+            currentDay: new Date(days.currentDay),
+            _exercices: days._exercices,
+          });
+        });
+        setDays(tmp);
+      } else {
+        const diffDays = differenceInDays(endDate, startDate);
+        const array = [];
+        if (diffDays > 0) {
+          for (let dayIndex = 0; dayIndex <= diffDays; dayIndex++) {
+            const currentDay = add(startOfDay(startDate), { days: dayIndex });
+            array.push({ currentDay });
+            array[dayIndex]._exercices = [];
+          }
         }
+        setDays(array);
       }
-      setDays(array);
     }
   }, [endDate]);
 
@@ -71,6 +105,7 @@ const Session = () => {
       <div className="mb-10">
         <div className="font-bold text-3xl mb-3">Durée</div>
         <ReactDatePicker
+          disabled={fetchedDays}
           className="border font-raleway rounded bg-grey-light p-3 w-1/5"
           placeholderText="Sélectionner une période"
           selected={startDate}
@@ -85,7 +120,10 @@ const Session = () => {
         <div className="grid grid-cols-12 space-x-8 font-raleway">
           <div className="col-span-3">
             <div className="font-bold text-3xl mb-9">Cours</div>
-            <div style={{ maxHeight: '65vh'}} className="bg-grey-light p-3 overflow-auto rounded space-y-4">
+            <div
+              style={{ maxHeight: "65vh" }}
+              className="bg-grey-light p-3 overflow-auto rounded space-y-4"
+            >
               {exercices?.map((exercice) => (
                 <Dragitem key={exercice._id} exercice={exercice} />
               ))}
@@ -94,10 +132,30 @@ const Session = () => {
           <div className="col-span-9">
             <div className="flex mb-3 justify-between items-center">
               <div className="font-bold text-3xl mb-3">Planning</div>
-              <Button action={handleSubmit} text="Créer la session" type="primary" />
+              <div className="flex">
+                <Button
+                  // action={handleSubmit}
+                  text={
+                    "Supprimer la session"
+                  }
+                  type="error"
+                />
+                <div className='ml-3'>
+                <Button
+                  action={handleSubmit}
+                  text={
+                    fetchedDays ? "Modifier la session" : "Créer la session"
+                  }
+                  type="primary"
+                />
+                </div>
+              </div>
             </div>
             <div className="flex">
-              <div style={{ maxHeight: '65vh'}} className="flex bg-grey-light rounded max-w-full overflow-auto">
+              <div
+                style={{ maxHeight: "65vh" }}
+                className="flex bg-grey-light rounded max-w-full overflow-auto"
+              >
                 {days.length ? (
                   days.map((day, index) => (
                     <div key={day.currentDay}>
@@ -115,9 +173,11 @@ const Session = () => {
                         </div>
                       </div>
                       <DropItem
-                        courses={day.courses}
+                        courses={day._exercices}
                         addCourse={addCourse}
-                        removeCourse={(item, index) => removeCourse(item, index)}
+                        removeCourse={(item, index) =>
+                          removeCourse(item, index)
+                        }
                         index={index}
                       />
                     </div>
