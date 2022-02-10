@@ -44,7 +44,7 @@ const Session = () => {
   };
 
   const handleSubmit = async () => {
-    if (fetchedDays) {
+    if (fetchedDays?.length) {
       const values = {
         days,
         sessionId: fetchedId,
@@ -52,8 +52,13 @@ const Session = () => {
       await api.axios.put("v1/session", values);
     } else {
       await api.axios.post("v1/session", { days });
+      fetchSession()
     }
   };
+
+  const removeSession = async () => {
+    await api.axios.delete(`v1/session/${fetchedId}`)
+  }
 
   const removeCourse = (item, index) => {
     let tmp = [...days];
@@ -76,7 +81,7 @@ const Session = () => {
 
   useEffect(() => {
     if (endDate && startDate) {
-      if (fetchedDays) {
+      if (fetchedDays?.length) {
         const tmp = [];
         fetchedDays.map((days) => {
           tmp.push({
@@ -105,7 +110,7 @@ const Session = () => {
       <div className="mb-10">
         <div className="font-bold text-3xl mb-3">Durée</div>
         <ReactDatePicker
-          disabled={fetchedDays}
+          disabled={fetchedDays?.length}
           className="border font-raleway rounded bg-grey-light p-3 w-1/5"
           placeholderText="Sélectionner une période"
           selected={startDate}
@@ -133,21 +138,21 @@ const Session = () => {
             <div className="flex mb-3 justify-between items-center">
               <div className="font-bold text-3xl mb-3">Planning</div>
               <div className="flex">
-                <Button
-                  // action={handleSubmit}
-                  text={
-                    "Supprimer la session"
-                  }
-                  type="error"
-                />
-                <div className='ml-3'>
-                <Button
-                  action={handleSubmit}
-                  text={
-                    fetchedDays ? "Modifier la session" : "Créer la session"
-                  }
-                  type="primary"
-                />
+                {fetchedDays?.length ? 
+                  <Button
+                    action={removeSession}
+                    text={"Supprimer"}
+                    type="black"
+                  />
+                : null}
+                <div className="ml-3">
+                  <Button
+                    action={handleSubmit}
+                    text={
+                      fetchedDays?.length ? "Mettre à jour" : "Créer la session"
+                    }
+                    type="primary"
+                  />
                 </div>
               </div>
             </div>
