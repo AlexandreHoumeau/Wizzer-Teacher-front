@@ -31,9 +31,15 @@
     permission: 'admin'
   },
   {
-    path: '/app/admin/s',
-    icon: 'UsersIcon',
-    name: 'Hello World',
+    path: '/app/home',
+    icon: 'HomeIcon',
+    name: 'Home',
+    permission: 'user'
+  },
+  {
+    path: '/app/modules',
+    icon: 'ModulesIcon',
+    name: 'Modules',
     permission: 'user'
   },
   // {
