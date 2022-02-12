@@ -8,6 +8,7 @@ import ThemedSuspense from './ThemedSuspense'
 import Table from './Table'
 import CardModule from './CardModule'
 import Select from './select'
+import Progress from './Progress'
 
 export { 
   Button,
@@ -20,4 +21,5 @@ export { 
   TagCourse,
   Table,
   Select,
+  Progress
 }
