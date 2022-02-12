@@ -1,3 +1,4 @@
 import Banner from './Banner'
+import Card from './Card'
 
-export default { Banner }
+export { Banner, Card }
