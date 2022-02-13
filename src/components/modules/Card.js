@@ -1,9 +1,11 @@
 import { Progress, TagCourse } from "components/ui";
 import React from "react";
+import { useHistory } from "react-router";
 
 const Card = ({ module }) => {
+  const history = useHistory()
   return (
-    <div className="bg-grey-light flex-col flex justify-between relative w-72 h-56 mr-6 px-8 py-6 rounded-3xl font-raleway">
+    <div onClick={() => history.push(`modules/${module._id}`)} className="bg-grey-light cursor-pointer hover:border-primary border-transparent transform duration-150 border flex-col flex justify-between relative w-72 h-56 mr-6 px-8 py-6 rounded-3xl font-raleway">
       <div>
         <div className="flex">
           <TagCourse
