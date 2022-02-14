@@ -53,7 +53,6 @@ const NewCourse = () => {
       points,
     });
     if (data?.$success) {
-      console.log("Hello World");
       history.goBack();
     }
   };
