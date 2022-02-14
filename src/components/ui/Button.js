@@ -8,7 +8,7 @@ const Button = ({ text, type, action, disabled }) => {
       onClick={action}
       className={classNames(
         disabled ? `bg-${type}-disabled` : `bg-${type}`,
-        'py-4 px-8 rounded-4xl'
+        'py-3 px-7 rounded-4xl'
         )}
       // className={`bg-${type} py-4 px-8 rounded-4xl`}
     >
