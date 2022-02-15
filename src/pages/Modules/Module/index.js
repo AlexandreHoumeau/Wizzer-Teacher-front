@@ -9,7 +9,7 @@ import { Button, Progress, TagCourse } from "components/ui";
 import api from "services/api";
 
 const ModuleOverview = () => {
-  const history = useHistory()
+  const history = useHistory();
   const [module, setModule] = useState();
   const [exercices, setExercices] = useState([]);
   const { moduleId } = useParams();
@@ -17,28 +17,45 @@ const ModuleOverview = () => {
   const fetchModule = async () => {
     const data = await api.axios.get(`/v1/user/modules/${moduleId}`);
     if (data?.module) {
-      setModule(data.module)
-      setExercices(data.exercices)
-      console.log(data.exercices)
+      setModule(data.module);
+      setExercices(data.exercices);
     }
   };
 
   const handleSublmit = async (exerciceId) => {
-    // create test
     const test = {
       _exercice: exerciceId,
       _module: moduleId,
-    }
+    };
 
-    const data = await api.axios.post('/v1/user/test', test)
+    const data = await api.axios.post("/v1/user/test", test);
     if (data?.test) {
-      console.log(data.test)
-      history.push(`/app/modules/${moduleId}/${data.test._id}`)
+      history.push(`/app/modules/${moduleId}/${data.test._id}`);
     }
-  }
+  };
+
+  const renderButton = (exercice) => {
+    if (exercice?.test?._id) {
+      return (
+        <Button
+          text={exercice?.test?.status ? 'Revoir' : 'Continuer'}
+          type="black"
+          action={() => history.push(`/app/modules/${moduleId}/${exercice.test._id}`)}
+        />
+      )
+    } else {
+      return (
+        <Button
+          action={() => handleSublmit(exercice._id)}
+          text="Commencer"
+          type="primary"
+        />
+      );
+    }
+  };
 
   useEffect(() => {
-    fetchModule();
+    fetchModule()
   }, []);
 
   return (
@@ -70,7 +87,11 @@ const ModuleOverview = () => {
                 <div
                   key={index}
                   className={classNames(
-                    exercice.test || index === 0 || module._exercices[index - 1]?.test  ? '' : 'opacity-50', 
+                    exercice.test?._id ||
+                      index === 0 ||
+                      exercices[index - 1]?.test?._id
+                      ? ""
+                      : "opacity-50",
                     "col-span-1 rounded-3xl p-8 bg-grey-light"
                   )}
                 >
@@ -80,12 +101,19 @@ const ModuleOverview = () => {
 
                   <div className="my-6">
                     <div>Valeur de l'exercice:</div>
-                    <div className="text-primary text-xl">{exercice.points} {exercice.points > 1 ? 'points': 'point'}</div>
+                    <div className="text-primary text-xl">
+                      {exercice.points}{" "}
+                      {exercice.points > 1 ? "points" : "point"}
+                    </div>
                   </div>
-                  <div className="text-xl mb-10 font-semibold">{exercice.title}</div>
-                  {exercice.test || index === 0 || module._exercices[index - 1]?.test ? (
-                    <Button action={() => handleSublmit(exercice._id)} text="Commencer" type="primary" />
-                  ): null}
+                  <div className="text-xl mb-10 font-semibold">
+                    {exercice.title}
+                  </div>
+                  {exercice.test?._id ||
+                  index === 0 ||
+                  exercices[index - 1]?.test?._id
+                    ? renderButton(exercice)
+                    : null}
                 </div>
               ))}
             </div>
