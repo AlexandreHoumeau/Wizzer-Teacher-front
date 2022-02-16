@@ -77,13 +77,15 @@ const Test = () => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center">
-              <Button
-                action={() => setIsOpen(true)}
-                text="Terminé"
-                type="primary"
-              />
-            </div>
+            {!test.repository && (
+              <div className="flex justify-center">
+                <Button
+                  action={() => setIsOpen(true)}
+                  text="Terminé"
+                  type="primary"
+                />
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -94,7 +96,7 @@ const Test = () => {
         onRequestClose={() => setIsOpen(false)}
         contentLabel="Example Modal"
       >
-        <Search />
+        <Search testId={testId} />
       </Modal>
     </div>
   );
@@ -110,5 +112,14 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    width: "35%",
+  },
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.75)",
   },
 };
