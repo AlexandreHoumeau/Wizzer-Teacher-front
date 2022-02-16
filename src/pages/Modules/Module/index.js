@@ -7,6 +7,7 @@ import { TagCourseExo } from "components/modules";
 import { Button, Progress, TagCourse } from "components/ui";
 
 import api from "services/api";
+import { ErrorIcon, SuccesIcon, WaitingIcon } from "assets/icons";
 
 const ModuleOverview = () => {
   const history = useHistory();
@@ -38,11 +39,13 @@ const ModuleOverview = () => {
     if (exercice?.test?._id) {
       return (
         <Button
-          text={exercice?.test?.status ? 'Revoir' : 'Continuer'}
+          text={exercice?.test?.status ? "Revoir" : "Continuer"}
           type="black"
-          action={() => history.push(`/app/modules/${moduleId}/${exercice.test._id}`)}
+          action={() =>
+            history.push(`/app/modules/${moduleId}/${exercice.test._id}`)
+          }
         />
-      )
+      );
     } else {
       return (
         <Button
@@ -54,8 +57,25 @@ const ModuleOverview = () => {
     }
   };
 
+  const renderStatus = (status) => {
+    console.log(status)
+    switch (status) {
+      case "accepted":
+        return <SuccesIcon />;
+
+      case "refused":
+        return <ErrorIcon />;
+
+      case "pending":
+        return <WaitingIcon className=""/>;
+
+      default:
+        return <div />;
+    }
+  };
+
   useEffect(() => {
-    fetchModule()
+    fetchModule();
   }, []);
 
   return (
@@ -102,18 +122,22 @@ const ModuleOverview = () => {
                   <div className="my-6">
                     <div>Valeur de l'exercice:</div>
                     <div className="text-primary text-xl">
-                      {exercice.points}{" "}
+                      {exercice.points}
                       {exercice.points > 1 ? "points" : "point"}
                     </div>
                   </div>
                   <div className="text-xl mb-10 font-semibold">
                     {exercice.title}
                   </div>
-                  {exercice.test?._id ||
-                  index === 0 ||
-                  exercices[index - 1]?.test?._id
-                    ? renderButton(exercice)
-                    : null}
+                  <div className="flex items-center justify-between">
+                    {exercice.test?._id ||
+                    index === 0 ||
+                    exercices[index - 1]?.test?._id
+                      ? renderButton(exercice)
+                      : null}
+                      
+                    {exercice?.test?.status && renderStatus(exercice.test.status)}
+                  </div>
                 </div>
               ))}
             </div>
