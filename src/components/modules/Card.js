@@ -7,6 +7,7 @@ const Card = ({ module }) => {
   const nmbTests = module._exercices
     .map((exercice) => exercice._tests)
     .filter((element) => element?.length).length;
+
   return (
     <div
       onClick={() => history.push(`modules/${module._id}`)}
