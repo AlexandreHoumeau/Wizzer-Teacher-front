@@ -24,6 +24,7 @@ export const authReducer = (state = initialState, action) => {
         isLoading: false,
         redirect: action.payload
       }
+      
 
     case 'SET_USER':
       return {
