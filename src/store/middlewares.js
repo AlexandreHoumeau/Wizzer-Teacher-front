@@ -9,7 +9,6 @@ import Store from './index'
 export const CheckAuthentication = (from = null) => {
   // get admin JWT
   const adminToken = localStorage.getItem(JWT_TOKEN)
-
   if (adminToken) {
     // decode token
     const decodedToken = jwtDecode(adminToken)
