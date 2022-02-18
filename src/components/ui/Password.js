@@ -4,6 +4,7 @@ import { useState } from "react";
 
 const Password = ({ placeholder, error, value, label, icon, id, name, onChange, onBlur }) => {
   const [passwordVisibility, setPasswordVisibility] = useState('password')
+
   function Icon({ icon, ...props }) {
     const Icon = Icons[icon];
     return <Icon {...props} />;
