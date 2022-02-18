@@ -1,6 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React from "react"
+import { useState } from "react"
+import { useEffect } from "react"
 
 const Progress = ({ total, current }) => {
   const [percent, setPercent] = useState(0)
@@ -8,6 +8,7 @@ const Progress = ({ total, current }) => {
   useEffect(() => {
     setPercent(( current / total) * 100)
   }, [current, total])
+
   return (
     <div className="font-raleway text-primary grid items-center grid-cols-6">
       <div className="w-full h-1 bg-grey rounded-lg relative col-span-4">
@@ -20,7 +21,7 @@ const Progress = ({ total, current }) => {
       {current} / {total}
     </div>
     </div>
-  );
-};
+  )
+}
 
 export default Progress;
