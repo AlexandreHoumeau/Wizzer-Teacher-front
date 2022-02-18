@@ -18,6 +18,7 @@ const ModuleOverview = () => {
       render: (value) => (
         <p className="ml-3">{value}</p>
       )
+
     },
     {
       title: "Difficulté",
