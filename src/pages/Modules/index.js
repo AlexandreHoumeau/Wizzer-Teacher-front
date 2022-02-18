@@ -11,9 +11,11 @@ const Modules = () => {
       setModules(data);
     }
   };
+  
   useEffect(() => {
     fetchModules();
   }, []);
+
   return (
     <div className="font-raleway">
       <div>
