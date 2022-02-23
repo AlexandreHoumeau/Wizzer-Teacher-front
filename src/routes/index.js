@@ -1,6 +1,5 @@
 import { lazy } from 'react'
 
-// use lazy for better code splitting, a.k.a. load faster
 const Home = lazy(() => import('../pages/Home'))
 const ModulesUser = lazy(() => import('../pages/Modules'))
 const ModulesUserOverview = lazy(() => import('../pages/Modules/Module'))
