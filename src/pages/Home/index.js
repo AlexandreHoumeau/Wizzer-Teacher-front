@@ -51,7 +51,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
         <div>
           <div>
             <div className="text-3xl font-bold mb-8">Vos Cours</div>
