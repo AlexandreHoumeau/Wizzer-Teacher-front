@@ -32,6 +32,7 @@ const Search = ({ testId }) => {
         },
       }
     );
+    
 
     if (data) {
       setRepo(data);
