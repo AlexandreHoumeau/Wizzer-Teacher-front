@@ -5,6 +5,16 @@ import api from "services/api";
 
 const Modules = () => {
   const [modules, setModules] = useState({});
+  const [session, setSession] = useState({})
+
+  const fetchSession = async () => {
+    const data = await api.axios.get('/v1/user/session')
+
+    if (data.session) {
+      console.log(data.session)
+    }
+  }
+
   const fetchModules = async () => {
     const data = await api.axios.get("/v1/user/modules");
     if (data) {
@@ -14,6 +24,7 @@ const Modules = () => {
   
   useEffect(() => {
     fetchModules();
+    fetchSession()
   }, []);
 
   return (
