@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import api from "services/api";
 
 const Modules = () => {
-  const [modules, setModules] = useState({});
+  const [modules, setModules] = useState({})
   const [session, setSession] = useState({})
 
   const fetchSession = async () => {
     const data = await api.axios.get('/v1/user/session')
 
-    if (data.session) {
+    if (data?.session) {
       console.log(data.session)
     }
   }
@@ -20,12 +20,12 @@ const Modules = () => {
     if (data) {
       setModules(data);
     }
-  };
+  }
   
   useEffect(() => {
-    fetchModules();
+    fetchModules()
     fetchSession()
-  }, []);
+  }, [])
 
   return (
     <div className="font-raleway">
