@@ -1,17 +1,24 @@
+import React, { useState, useEffect } from "react";
 import { Button } from "components/ui";
-import React from "react";
 import Battle from 'assets/images/battle-on.png'
 
 const Banner = ({ todayEcercices }) => {
+  const [banner, setBanner] = useState({
+    title: 'Aucune battle disponible',
+    button: 'Voir l’historique des battle',
+    bg: 'primary',
+    bgBtn: 'black'
+  })
 
-  const render = () => {
-    
-  }
+  useEffect(() => {
+
+  })
+
   return (
     <div className=" bg-primary-light mb-10 p-8 rounded-3xl">
       <div className="grid grid-cols-2">
         <div className="col-span-1">
-          <div className="font-bold text-4xl">C’est l’heure de la battle !</div>
+          <div className="font-bold text-4xl">{banner.title}</div>
           <div className="text-grey-dark text-lg mt-4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             consequat, lacus, pellentesque pellentesque quis auctor. Mauris enim
@@ -19,7 +26,7 @@ const Banner = ({ todayEcercices }) => {
             est.
           </div>
           <div className="mt-10">
-            <Button text="commencer" type="primary" />
+            <Button text={banner.button} type={banner.bgBtn} />
           </div>
         </div>
         <div>
