@@ -2,7 +2,11 @@ import { Button } from "components/ui";
 import React from "react";
 import Battle from 'assets/images/battle-on.png'
 
-const Banner = () => {
+const Banner = ({ todayEcercices }) => {
+
+  const render = () => {
+    
+  }
   return (
     <div className=" bg-primary-light mb-10 p-8 rounded-3xl">
       <div className="grid grid-cols-2">
