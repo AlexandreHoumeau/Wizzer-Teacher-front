@@ -22,7 +22,6 @@ const ModuleOverview = () => {
       setExercices(data.exercices);
     }
   };
-
   
   const handleSublmit = async (exerciceId) => {
     const test = {
