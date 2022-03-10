@@ -4,33 +4,31 @@ import React, { useEffect, useState } from "react";
 import api from "services/api";
 
 const Modules = () => {
-  const [modules, setModules] = useState({})
-  const [session, setSession] = useState({})
+  const [modules, setModules] = useState({});
+  const [todayExercices, setTodayExercices] = useState({});
 
   const fetchSession = async () => {
-    const data = await api.axios.get('/v1/user/session')
+    const data = await api.axios.get("/v1/user/session");
 
-    if (data?.session) {
-      console.log(data.session)
-    }
-  }
+    setTodayExercices(data.session);
+  };
 
   const fetchModules = async () => {
     const data = await api.axios.get("/v1/user/modules");
     if (data) {
       setModules(data);
     }
-  }
-  
+  };
+
   useEffect(() => {
-    fetchModules()
-    fetchSession()
-  }, [])
+    fetchModules();
+    fetchSession();
+  }, []);
 
   return (
     <div className="font-raleway">
       <div>
-        <Banner />
+        <Banner todayExercices={todayExercices} />
       </div>
       {modules.dev && (
         <div>
@@ -50,9 +48,7 @@ const Modules = () => {
 
       {modules.design && (
         <div className="mt-10">
-          <div className="text-3xl font-semibold mb-8">
-            Modules design
-          </div>
+          <div className="text-3xl font-semibold mb-8">Modules design</div>
           <div className="flex">
             {modules.design.map(
               (module) =>
