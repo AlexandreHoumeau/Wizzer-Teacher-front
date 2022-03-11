@@ -12,7 +12,7 @@ const Banner = ({ todayExercices }) => {
   });
 
   useEffect(() => {
-    console.log(todayExercices)
+    console.log(todayExercices);
     if (todayExercices?._exercices?.length > 0) {
       setBanner({
         title: "C’est l’heure de la battle !",
@@ -48,21 +48,29 @@ const Banner = ({ todayExercices }) => {
                 </div>
               )}
             </div>
-            {isOpen && (
-              <div className="mt-10">
-                {todayExercices?._exercices?.map((exercice) => (
-                  <div key={exercice._id}>
-                    <p>Hello World</p>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
         <div>
           <img className="ml-auto mr-20 w-72" alt="battle" src={Battle} />
         </div>
       </div>
+      {isOpen && (
+        <div className="mt-10 flex overflow-x-scroll min-w-full  justify-between">
+          {todayExercices?._exercices?.map((exercice) => (
+            <div
+            key={exercice._id}
+            className="bg-white rounded-3xl flex-shrink-0 w-72 px-8 py-6 mr-6"
+            >
+              <div className="flex">
+                <div className="bg-primary-light px-3 py-1 text-primary mb-5 rounded-3xl">
+                  {exercice._module.title}
+                </div>
+              </div>
+              <div className="text-xl">{exercice.title}</div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
