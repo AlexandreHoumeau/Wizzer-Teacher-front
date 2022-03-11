@@ -9,8 +9,7 @@ const Modules = () => {
 
   const fetchSession = async () => {
     const data = await api.axios.get("/v1/user/session");
-
-    setTodayExercices(data.session);
+    setTodayExercices(data.todayExercices);
   };
 
   const fetchModules = async () => {
