@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "components/ui";
 import Battle from "assets/images/battle-on.png";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Banner = ({ todayExercices }) => {
+  const history = useHistory()
   const [isOpen, setIsOpen] = useState(false);
   const [banner, setBanner] = useState({
     title: "Aucune battle disponible",
@@ -12,7 +14,6 @@ const Banner = ({ todayExercices }) => {
   });
 
   useEffect(() => {
-    console.log(todayExercices);
     if (todayExercices?._exercices?.length > 0) {
       setBanner({
         title: "C’est l’heure de la battle !",
@@ -36,7 +37,7 @@ const Banner = ({ todayExercices }) => {
           </div>
           <div>
             <div className="mt-10 flex items-center">
-              <Button text={banner.button} type={banner.bgBtn} />
+              <Button action={() => history.push('/app/modules/battle')} text={banner.button} type={banner.bgBtn} />
               {todayExercices?._exercices?.length > 0 && (
                 <div
                   onClick={() => setIsOpen(!isOpen)}
@@ -55,11 +56,12 @@ const Banner = ({ todayExercices }) => {
         </div>
       </div>
       {isOpen && (
-        <div className="mt-10 flex overflow-x-scroll min-w-full  justify-between">
+        <div className="mt-10 flex overflow-x-scroll min-w-full pb-3 justify-between">
           {todayExercices?._exercices?.map((exercice) => (
             <div
+            onClick={() => history.push('/app/modules/battle')}
             key={exercice._id}
-            className="bg-white rounded-3xl flex-shrink-0 w-72 px-8 py-6 mr-6"
+            className="bg-white cursor-pointer hover:border-2 border-primary rounded-3xl flex-shrink-0 w-72 px-8 py-6 mr-6"
             >
               <div className="flex">
                 <div className="bg-primary-light px-3 py-1 text-primary mb-5 rounded-3xl">
