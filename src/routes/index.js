@@ -3,6 +3,7 @@ import { lazy } from 'react'
 const Home = lazy(() => import('../pages/Home'))
 const ModulesUser = lazy(() => import('../pages/Modules'))
 const ModulesUserOverview = lazy(() => import('../pages/Modules/Module'))
+const BattleOverview = lazy(() => import('../pages/Modules/Battle'))
 const TestOverview = lazy(() => import('../pages/Modules/Test'))
 const AdminHome = lazy(() => import('../pages/Admin/Home/index'))
 const Modules = lazy(() => import('../pages/Admin/Modules'))
@@ -20,6 +21,10 @@ const routes = [
   {
     path: '/modules',
     component: ModulesUser,
+  },
+  {
+    path: '/modules/battle',
+    component: BattleOverview,
   },
   {
     path: '/modules/:moduleId',
