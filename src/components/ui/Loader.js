@@ -4,7 +4,7 @@ import { Player, Controls } from "@lottiefiles/react-lottie-player";
 const Loader = ({ isLoading }) => {
   if (isLoading) {
     return (
-      <div className="w-full h-full backdrop-filter flex justify-center items-center backdrop-blur-sm absolute z-50">
+      <div className="w-screen h-screen backdrop-filter left-0 top-0 bottom-0 flex justify-center items-center backdrop-blur-sm absolute z-50">
         {/* <div className=" w-full h-full flex justify-center" /> */}
         <div className="">
           <Player

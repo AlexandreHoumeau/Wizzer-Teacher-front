@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useEffect, useState } from "react";
 
 export default function Table({ columns, loading, dataSource, ...props }) {
@@ -5,6 +6,7 @@ export default function Table({ columns, loading, dataSource, ...props }) {
 
   useEffect(() => {
     const temp = [...dataSource];
+    console.log(temp)
     setDatas(temp);
   }, [dataSource]);
 
@@ -15,13 +17,13 @@ export default function Table({ columns, loading, dataSource, ...props }) {
           <div>Loading ...</div>
         </div>
       ) : (
-        <div className="overflow-x-auto bg-white flex flex-col text-left shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table className="table-fix w-full">
+        <div className="overflow-x-auto bg-white flex flex-col  shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <table className="table-fixed table w-full">
             <thead className="text-xs bg-grey-light uppercase border-b border-slate-200">
               <tr>
-                {columns.map((column) => (
+                {columns.map((column, index) => (
                   <th
-                    className="text-left py-5 px-3 text-slate-600 text-xs"
+                    className={classNames('text-left py-5 px-3 text-slate-600 text-xs', column.className)}
                     key={column.key}
                   >
                     <div className=" text-grey-dark text-sm font-raleway font-bold">
@@ -32,12 +34,12 @@ export default function Table({ columns, loading, dataSource, ...props }) {
               </tr>
             </thead>
             <tbody className="w-full bg-white">
-              {datas?.map((data) => (
-                <tr className="border-b border-slate-200" key={data.key + '!ef'}>
+              {datas?.map((data, dataIndex) => (
+                <tr className="border-b border-slate-200" key={data.key || dataIndex}>
                   {Object.keys(data).map((key, index) => {
                     return key !== "key" ? (
                       <td
-                        className="py-5 px-3 font-raleway text-grey-darker font-semibold"
+                        className={classNames("py-5 px-3 font-raleway text-grey-darker font-semibold")}
                         key={index + '3"ç'}
                       >
                         {columns.find((c) => c.dataIndex === key)?.render
