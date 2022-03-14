@@ -5,23 +5,13 @@ import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import api from "services/api";
 
-const Search = ({ testId }) => {
+const Search = ({ testId, action }) => {
   const [username, setUsername] = useState();
   const [repo, setRepo] = useState([]);
   const [selectedRepo, setSelectedRepo] = useState();
   const [error, setError] = useState(false);
   const history = useHistory()
   const { moduleId } = useParams()
-
-  const submitRepo = async () => {
-    const data = await api.axios.put(`/v1/user/test/${testId}`, {
-      repository: selectedRepo,
-    });
-    
-    if (data.success) {
-      history.push(`/app/modules/${moduleId}`)
-    }
-  };
 
   const handleSubmit = async () => {
     const data = await api.axios.get(
@@ -101,7 +91,7 @@ const Search = ({ testId }) => {
       )}
       <div className="flex justify-center mt-5">
         <Button
-          action={submitRepo}
+          action={() => action(selectedRepo)}
           disabled={!selectedRepo}
           type="primary"
           text="Soumettre le repo"
