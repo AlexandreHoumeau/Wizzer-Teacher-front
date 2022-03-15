@@ -56,7 +56,7 @@ const Battle = () => {
   const fetchBattle = async () => {
     try {
       const { todayExercices } = await api.axios.get("/v1/user/session");
-      formatData(todayExercices._exercices);
+      formatData(todayExercices);
     } catch (error) {}
   };
 
@@ -75,11 +75,12 @@ const Battle = () => {
             ? "waiting"
             : "error",
         status: {
-          type: null,
+          type: exercice.isDone,
           id: exercice._id,
           action: () => history.push(`battle/${exercice._id}`)
         },
       });
+      console.log(data)
     }
     setExercices(data);
   };
