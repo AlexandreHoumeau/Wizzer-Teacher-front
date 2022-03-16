@@ -14,7 +14,8 @@ const Banner = ({ todayExercices }) => {
   });
 
   useEffect(() => {
-    if (todayExercices?._exercices?.length > 0) {
+    console.log(todayExercices)
+    if (todayExercices?.length > 0) {
       setBanner({
         title: "C’est l’heure de la battle !",
         button: "Commencer",
@@ -38,7 +39,7 @@ const Banner = ({ todayExercices }) => {
           <div>
             <div className="mt-10 flex items-center">
               <Button action={() => history.push('/app/modules/battle')} text={banner.button} type={banner.bgBtn} />
-              {todayExercices?._exercices?.length > 0 && (
+              {todayExercices?.length > 0 && (
                 <div
                   onClick={() => setIsOpen(!isOpen)}
                   className=" ml-6 cursor-pointer text-primary font-semibold"
@@ -57,7 +58,7 @@ const Banner = ({ todayExercices }) => {
       </div>
       {isOpen && (
         <div className="mt-10 flex overflow-x-scroll min-w-full pb-3 justify-between">
-          {todayExercices?._exercices?.map((exercice) => (
+          {todayExercices?.map((exercice) => (
             <div
             onClick={() => history.push('/app/modules/battle')}
             key={exercice._id}
