@@ -16,12 +16,14 @@ const BattleExercice = () => {
   const history = useHistory()
   const [exercice, setExercice] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [done, setDone] = useState(false)
 
   const fetchExercice = async () => {
     try {
-      const { exercice } = await api.axios.get(
+      const { exercice, isDone } = await api.axios.get(
         `/v1/user/exercice/${exerciceId}`
       );
+      setDone(isDone)
       setExercice(exercice);
     } catch (error) {}
   };
@@ -100,7 +102,7 @@ const BattleExercice = () => {
                 </div>
               </div>
             </div>
-            {!exercice.repository && (
+            {!exercice.repository && !done && (
               <div className="flex justify-center">
                 <Button
                   action={() => setIsOpen(true)}
