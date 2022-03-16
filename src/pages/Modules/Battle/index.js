@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { endOfDay, formatDuration, intervalToDuration } from "date-fns";
 import { useHistory } from "react-router";
 
-import { Button, Table, Tag, TagCourse } from "components/ui";
+import { Button, Table, Tag } from "components/ui";
 import api from "services/api";
 import { fr } from "date-fns/locale";
 
@@ -80,7 +80,6 @@ const Battle = () => {
           action: () => history.push(`battle/${exercice._id}`)
         },
       });
-      console.log(data)
     }
     setExercices(data);
   };
@@ -104,6 +103,11 @@ const Battle = () => {
 
   return (
     <div className="font-raleway">
+      <div className="flex space-x-4 mb-4">
+        <div className="bg-primary text-white text-lg font-medium rounded-lg px-4 py-2 cursor-pointer">Cours de la battle</div>
+        <div className="bg-grey-light rounded-lg text-lg font-medium px-4 py-2 cursor-pointer">Classement de la battle</div>
+        <div className="bg-grey-light rounded-lg text-lg font-medium px-4 py-2 cursor-pointer">Historique des battles</div>
+      </div>
       <div className=" flex items-center mb-10">
         <div className="text-3xl font-bold">La battle du jour</div>
         {duration && (
