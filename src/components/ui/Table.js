@@ -17,7 +17,7 @@ export default function Table({ columns, loading, dataSource, ...props }) {
           <div>Loading ...</div>
         </div>
       ) : (
-        <div className="overflow-x-auto bg-white flex flex-col  shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <div className="overflow-x-auto bg-grey-light flex flex-col overflow-hidden border-b border-gray-200 sm:rounded-lg">
           <table className="table-fixed table w-full">
             <thead className="text-xs bg-grey-light uppercase border-b border-slate-200">
               <tr>
@@ -33,9 +33,12 @@ export default function Table({ columns, loading, dataSource, ...props }) {
                 ))}
               </tr>
             </thead>
-            <tbody className="w-full bg-white">
+            <tbody className="w-full bg-grey-light">
               {datas?.map((data, dataIndex) => (
-                <tr className="border-b border-slate-200" key={data.key || dataIndex}>
+                <tr className={classNames(
+                  "border-slate-200",
+                  datas[dataIndex + 1] ? 'border-b' : ''
+                )} key={data.key || dataIndex}>
                   {Object.keys(data).map((key, index) => {
                     return key !== "key" ? (
                       <td
