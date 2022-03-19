@@ -5,6 +5,7 @@ const ModulesUser = lazy(() => import('../pages/Modules'))
 const ModulesUserOverview = lazy(() => import('../pages/Modules/Module'))
 const BattleOverview = lazy(() => import('../pages/Modules/Battle'))
 const BattleExercice = lazy(() => import('../pages/Modules/Battle/Exercice'))
+const BattleRank = lazy(() => import('../pages/Modules/Battle/Ranking'))
 const TestOverview = lazy(() => import('../pages/Modules/Test'))
 const AdminHome = lazy(() => import('../pages/Admin/Home/index'))
 const Modules = lazy(() => import('../pages/Admin/Modules'))
@@ -30,6 +31,10 @@ const routes = [
   {
     path: '/modules/battle/:exerciceId',
     component: BattleExercice,
+  },
+  {
+    path: '/modules/battle/old/:battleId',
+    component: BattleRank,
   },
   {
     path: '/modules/:moduleId',
