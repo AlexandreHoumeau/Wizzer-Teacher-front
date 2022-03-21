@@ -28,7 +28,7 @@ const Login = ({ isLoading }) => {
         .post("v1/auth/login", values)
         .then((res) => {
           if (res.$token) {
-            history.push('/app/home')
+            history.push('/app/admin/home')
           }
         })
     },
