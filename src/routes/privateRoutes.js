@@ -13,7 +13,7 @@ const PrivateRoute = ({ component: Component, roles, path, ...rest }) => {
       render={(props) => 
         hasRoles(roles) ? (
           <Component {...props} />
-        ) : isLogin() ?  <Unauthorized /> : <Redirect to="/login" />
+        ) : isLogin() ? <Redirect to="/app/home" /> : <Redirect to="/login" />
       }
     />
   );
