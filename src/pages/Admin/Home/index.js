@@ -49,7 +49,7 @@ const Home = () => {
 
   return (
     <div className="font-raleway">
-      {todayExercices.length > 0 && (
+      {todayExercices?.length > 0 && (
         <div>
           <div className="flex items-center justify-between">
             <div className="font-semibold text-3xl mb-5">
@@ -154,7 +154,7 @@ const Home = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="value" fill="#1F4CEC" />
+                <Bar dataKey="value" fill="#ECF0FD" />
               </BarChart>
               </div>
             )}
