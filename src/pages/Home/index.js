@@ -115,7 +115,7 @@ const Home = () => {
                 {stats.randomExercice?.map((exercice) => (
                   <div className="bg-white p-8 rounded-xl">
                     <div className="flex">
-                      <div className="bg-waiting p-2 rounded-full text-white">
+                      <div className="bg-primary-light p-2 rounded-full text-primary">
                         {exercice.moduleTitle}
                       </div>
                     </div>
