@@ -1,84 +1,96 @@
-import { lazy } from 'react'
+import { lazy } from "react";
 
-const Home = lazy(() => import('../pages/Home'))
-const ModulesUser = lazy(() => import('../pages/Modules'))
-const ModulesUserOverview = lazy(() => import('../pages/Modules/Module'))
-const BattleOverview = lazy(() => import('../pages/Modules/Battle'))
-const BattleExercice = lazy(() => import('../pages/Modules/Battle/Exercice'))
-const BattleRank = lazy(() => import('../pages/Modules/Battle/Ranking'))
-const TestOverview = lazy(() => import('../pages/Modules/Test'))
-const AdminHome = lazy(() => import('../pages/Admin/Home/index'))
-const Modules = lazy(() => import('../pages/Admin/Modules'))
-const NewModule = lazy(() => import('../pages/Admin/Modules/NewModules'))
-const ModuleOverview = lazy(() => import('pages/Admin/Modules/Module')) 
-const NewCourse = lazy(() => import('pages/Admin/Modules/Module/New')) 
-const EditCourse = lazy(() => import('pages/Admin/Modules/Module/Edit')) 
-const Session = lazy(() => import('pages/Admin/Sessions'))
+const Home = lazy(() => import("../pages/Home"));
+const ModulesUser = lazy(() => import("../pages/Modules"));
+const ModulesUserOverview = lazy(() => import("../pages/Modules/Module"));
+const BattleOverview = lazy(() => import("../pages/Modules/Battle"));
+const BattleExercice = lazy(() => import("../pages/Modules/Battle/Exercice"));
+const BattleRank = lazy(() => import("../pages/Modules/Battle/Ranking"));
+const TestOverview = lazy(() => import("../pages/Modules/Test"));
+const AdminHome = lazy(() => import("../pages/Admin/Home/index"));
+const AdminUser = lazy(() => import("../pages/Admin/Users/index"));
+const AdminUserOverview = lazy(() => import("../pages/Admin/Users/overview"));
+const Modules = lazy(() => import("../pages/Admin/Modules"));
+const NewModule = lazy(() => import("../pages/Admin/Modules/NewModules"));
+const ModuleOverview = lazy(() => import("pages/Admin/Modules/Module"));
+const NewCourse = lazy(() => import("pages/Admin/Modules/Module/New"));
+const EditCourse = lazy(() => import("pages/Admin/Modules/Module/Edit"));
+const Session = lazy(() => import("pages/Admin/Sessions"));
 
 const routes = [
   {
-    path: '/home',
+    path: "/home",
     component: Home,
   },
   {
-    path: '/modules',
+    path: "/modules",
     component: ModulesUser,
   },
   {
-    path: '/modules/battle',
+    path: "/modules/battle",
     component: BattleOverview,
   },
   {
-    path: '/modules/battle/:exerciceId',
+    path: "/modules/battle/:exerciceId",
     component: BattleExercice,
   },
   {
-    path: '/modules/battle/old/:battleId',
+    path: "/modules/battle/old/:battleId",
     component: BattleRank,
   },
   {
-    path: '/modules/:moduleId',
+    path: "/modules/:moduleId",
     component: ModulesUserOverview,
   },
   {
-    path: '/modules/:moduleId/:testId',
+    path: "/modules/:moduleId/:testId",
     component: TestOverview,
   },
   {
-    path: '/admin/home',
+    path: "/admin/home",
     component: AdminHome,
-    roles: ['admin']
+    roles: ["admin"],
   },
   {
-    path: '/admin/modules/new',
+    path: "/admin/user",
+    component: AdminUser,
+    roles: ["admin"],
+  },
+  {
+    path: "/admin/user/:userId",
+    component: AdminUserOverview,
+    roles: ["admin"],
+  },
+  {
+    path: "/admin/modules/new",
     component: NewModule,
-    roles: ['admin']
+    roles: ["admin"],
   },
   {
-    path: '/admin/modules',
+    path: "/admin/modules",
     component: Modules,
-    roles: ['admin']
+    roles: ["admin"],
   },
   {
-    path: '/admin/modules/:id',
+    path: "/admin/modules/:id",
     component: ModuleOverview,
-    roles: ['admin']
+    roles: ["admin"],
   },
   {
-    path: '/admin/modules/:id/new',
+    path: "/admin/modules/:id/new",
     component: NewCourse,
-    roles: ['admin']
+    roles: ["admin"],
   },
   {
-    path: '/admin/modules/:id/edit/:exerciceId',
+    path: "/admin/modules/:id/edit/:exerciceId",
     component: EditCourse,
-    roles: ['admin']
+    roles: ["admin"],
   },
   {
-    path: '/admin/session',
+    path: "/admin/session",
     component: Session,
-    roles: ['admin']
-  }
-]
+    roles: ["admin"],
+  },
+];
 
-export default routes
+export default routes;
