@@ -32,14 +32,14 @@ const renderCustomizedLabel = ({
 
 const Chart = ({ data }) => {
   return (
-    <PieChart width={300} height={270}>
+    <PieChart width={300} height={180}>
       <Pie
         data={data}
         cx={150}
-        cy={150}
+        cy={85}
         labelLine={false}
         label={renderCustomizedLabel}
-        outerRadius={100}
+        outerRadius={80}
         fill="#8884d8"
         dataKey="value"
       >
