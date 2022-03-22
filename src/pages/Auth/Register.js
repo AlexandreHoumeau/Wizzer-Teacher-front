@@ -1,18 +1,18 @@
-import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import authentification_background from "assets/images/authentification_background.png";
+import { Player } from "@lottiefiles/react-lottie-player";
 import Button from "components/ui/Button";
 import Input from "components/ui/Input";
-import Password from "components/ui/Password";
-import api from "services/api";
-import { connect } from "react-redux";
 import Loader from "components/ui/Loader";
-import { toast } from "react-toastify";
+import Password from "components/ui/Password";
+import { useFormik } from "formik";
+import React from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router";
+import { toast } from "react-toastify";
+import api from "services/api";
+import * as Yup from "yup";
 
 const Register = ({ isLoading }) => {
-  const history = useHistory()
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -29,7 +29,9 @@ const Register = ({ isLoading }) => {
       lastName: Yup.string().required(
         "Merci de renseigner votre nom de famille"
       ),
-      password: Yup.string().min(8, 'Le mot de passe doit faire minimum 8 caractères').required("Merci de renseigner votre mot de passe"),
+      password: Yup.string()
+        .min(8, "Le mot de passe doit faire minimum 8 caractères")
+        .required("Merci de renseigner votre mot de passe"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Le mot de passe est différent")
         .required("Merci de renseigner votre mot de passe"),
@@ -39,8 +41,10 @@ const Register = ({ isLoading }) => {
         .post("v1/auth/register", values)
         .then((res) => {
           if (res.success) {
-            toast.success('Merci de vous avoir enregisté. Vous pouvez maintenant vous connecter !')
-            history.push('/login')
+            toast.success(
+              "Merci de vous avoir enregisté. Vous pouvez maintenant vous connecter !"
+            );
+            history.push("/login");
           }
         })
         .catch((err) => {
@@ -61,7 +65,9 @@ const Register = ({ isLoading }) => {
             </h2>
             <p className="mt-4 md:mt-3 w-3/5">
               Si vous avez déjà un compte, vous pouvez vous{" "}
-              <a href="/login" className="text-primary font-bold">connecter ici !</a>
+              <a href="/login" className="text-primary font-bold">
+                connecter ici !
+              </a>
             </p>
             <div className="mt-10">
               <form onSubmit={formik.handleSubmit}>
@@ -150,12 +156,24 @@ const Register = ({ isLoading }) => {
         </div>
         <div className="md:flex md:w-1/2 items-center justify-center flex-1 m-5 bg-primary-light rounded-2xl">
           <div className="w-1/2">
-            <img
+            {/* <img
               className="object-contain"
               src={authentification_background}
               alt="authentification_background"
-            ></img>
-            <h1 className="font-bold text-grey-darker text-left text-3xl mt-20">
+            ></img> */}
+            <Player
+              autoplay
+              loop
+              src="https://assets6.lottiefiles.com/temporary_files/vGyy7K.json"
+              className="w-full"
+            >
+              {/* <Controls
+                visible={true}
+                buttons={["play", "repeat", "frame", "debug"]}
+              /> */}
+            </Player>
+
+            <h1 className="font-bold text-grey-darker text-left text-3xl">
               Wizzer Teacher
             </h1>
             <p className="font-medium text-grey-darker text-left text-2xl mt-4">

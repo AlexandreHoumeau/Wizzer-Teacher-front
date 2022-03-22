@@ -1,14 +1,15 @@
-import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import authentification_background from "assets/images/authentification_background.png";
-import api from "services/api";
-import { useHistory } from "react-router";
+import { Player } from "@lottiefiles/react-lottie-player";
 import Button from "components/ui/Button";
 import Input from "components/ui/Input";
-import Password from "components/ui/Password";
 import Loader from "components/ui/Loader";
+import Password from "components/ui/Password";
+import { useFormik } from "formik";
+import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
+import api from "services/api";
+import * as Yup from "yup";
+
 
 const Login = ({ isLoading }) => {
   const history = useHistory();
@@ -24,13 +25,11 @@ const Login = ({ isLoading }) => {
       password: Yup.string().required("Ce champ est requis"),
     }),
     onSubmit: async (values) => {
-      await api.axios
-        .post("v1/auth/login", values)
-        .then((res) => {
-          if (res.$token) {
-            history.push('/app/admin/home')
-          }
-        })
+      await api.axios.post("v1/auth/login", values).then((res) => {
+        if (res.$token) {
+          history.push("/app/admin/home");
+        }
+      });
     },
   });
 
@@ -38,7 +37,7 @@ const Login = ({ isLoading }) => {
     <div className="relative">
       <Loader isLoading={isLoading} />
       <div className="md:flex h-screen font-raleway">
-      <div className="flex items-center justify-center flex-1">
+        <div className="flex items-center justify-center flex-1">
           <div className="mx-24 px-24 md:mx-14 md:px-14 mt-10 md:mt-16 items-center">
             <h2 className="font-bold text-grey-darker text-left text-3xl">
               Connexion
@@ -90,12 +89,24 @@ const Login = ({ isLoading }) => {
         </div>
         <div className="md:flex md:w-1/2 items-center justify-center flex-1 m-5 bg-primary-light rounded-2xl">
           <div className="w-1/2">
-            <img
+            {/* <img
               className=""
               src={authentification_background}
               alt="authentification_background"
-            ></img>
-            <h1 className="font-bold text-grey-darker text-left text-3xl mt-20">
+            ></img> */}
+            <Player
+              autoplay
+              loop
+              src="https://assets6.lottiefiles.com/temporary_files/vGyy7K.json"
+              className="w-full"
+            >
+              {/* <Controls
+                visible={true}
+                buttons={["play", "repeat", "frame", "debug"]}
+              /> */}
+            </Player>
+
+            <h1 className="font-bold text-grey-darker text-left text-3xl">
               Wizzer Teacher
             </h1>
             <p className="font-medium text-grey-darker text-left text-2xl mt-4">
