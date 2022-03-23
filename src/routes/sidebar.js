@@ -19,9 +19,9 @@
     permission: 'admin'
   },
   {
-    path: '/app/admin/session',
+    path: '/app/admin/battle',
     icon: 'SessionsIcon',
-    name: 'Sessions',
+    name: 'Battles',
     permission: 'admin'
   },
   {

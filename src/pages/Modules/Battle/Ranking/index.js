@@ -32,7 +32,7 @@ const columns = [
     ),
   },
   {
-    title: "Pourcentage de cours suivi",
+    title: "Pourcentage de participation",
     dataIndex: "participation",
     key: "participation",
     render: (percent) => <div className="font-normal">{percent} %</div>,

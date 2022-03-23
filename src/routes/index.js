@@ -5,6 +5,7 @@ const ModulesUser = lazy(() => import("../pages/Modules"));
 const ModulesUserOverview = lazy(() => import("../pages/Modules/Module"));
 const BattleOverview = lazy(() => import("../pages/Modules/Battle"));
 const BattleExercice = lazy(() => import("../pages/Modules/Battle/Exercice"));
+const BattleAdmin = lazy(() => import('../pages/Admin/Sessions/History'))
 const BattleRank = lazy(() => import("../pages/Modules/Battle/Ranking"));
 const TestOverview = lazy(() => import("../pages/Modules/Test"));
 const AdminHome = lazy(() => import("../pages/Admin/Home/index"));
@@ -58,6 +59,7 @@ const routes = [
   },
   {
     path: "/admin/user/:userId",
+    goBack: true,
     component: AdminUserOverview,
     roles: ["admin"],
   },
@@ -87,8 +89,13 @@ const routes = [
     roles: ["admin"],
   },
   {
-    path: "/admin/session",
+    path: "/admin/battle",
     component: Session,
+    roles: ["admin"],
+  },
+  {
+    path: "/admin/battle/history",
+    component: BattleAdmin,
     roles: ["admin"],
   },
 ];

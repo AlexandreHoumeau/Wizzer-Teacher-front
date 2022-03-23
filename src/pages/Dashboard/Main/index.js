@@ -20,6 +20,7 @@ const Main = ({ routes, isLoading }) => {
                   exact={true}
                   path={`/app${route.path}`}
                   roles={route.roles}
+                  goBack={route.goBack}
                   component={route.component}
                   // render={(props) => <route.component {...props} />}
                 />
