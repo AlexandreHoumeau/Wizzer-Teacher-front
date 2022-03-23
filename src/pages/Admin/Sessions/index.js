@@ -35,7 +35,6 @@ const Session = () => {
   const fetchSession = async () => {
     const data = await api.axios.get("v1/session");
     if (data?.session?.days) {
-      console.log(data);
       setFetchedId(data.session._id);
       setFetchedDays(data.session.days);
       setStartDate(new Date(data.startAt));
@@ -57,7 +56,14 @@ const Session = () => {
   };
 
   const removeSession = async () => {
-    await api.axios.delete(`v1/session/${fetchedId}`)
+    try {
+      await api.axios.delete(`v1/session/${fetchedId}`)
+      setFetchedId(null)
+      setFetchedDays(null)
+      setStartDate(null)
+      setDays([])
+      setEndDate(null);
+    } catch (error) {}
   }
 
   const removeCourse = (item, index) => {
