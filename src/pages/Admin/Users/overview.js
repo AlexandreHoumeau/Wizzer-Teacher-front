@@ -60,7 +60,7 @@ const UserOverview = () => {
             <div className="flex items-center space-x-4">
               <img
                 className="inline-block w-24 h-24 mr-4 rounded-full"
-                src="https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
+                src={user?.picture}
                 alt=""
               />
               <div className="space-y-4">

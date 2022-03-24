@@ -65,6 +65,7 @@ const routes = [
   },
   {
     path: "/admin/modules/new",
+    goBack: true,
     component: NewModule,
     roles: ["admin"],
   },
@@ -75,16 +76,19 @@ const routes = [
   },
   {
     path: "/admin/modules/:id",
+    goBack: true,
     component: ModuleOverview,
     roles: ["admin"],
   },
   {
     path: "/admin/modules/:id/new",
+    goBack: true,
     component: NewCourse,
     roles: ["admin"],
   },
   {
     path: "/admin/modules/:id/edit/:exerciceId",
+    goBack: true,
     component: EditCourse,
     roles: ["admin"],
   },
@@ -95,6 +99,7 @@ const routes = [
   },
   {
     path: "/admin/battle/history",
+    goBack: true,
     component: BattleAdmin,
     roles: ["admin"],
   },

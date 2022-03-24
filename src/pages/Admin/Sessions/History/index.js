@@ -23,7 +23,7 @@ const columns = [
       <div className="flex items-center font-normal space-x-2">
         <img
           className="inline-block w-10 h-10 mr-4 rounded-full"
-          src="https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
+          src={user?.picture}
           alt=""
         />
         <div>{user.firstName}</div>
@@ -105,7 +105,7 @@ const History = () => {
                 onClick={() => setSelectedSession(session)}
                 className={classNames(
                   "bg-white my-2 rounded p-5 cursor-pointer",
-                  selectedSession._id === session._id && "border-primary border"
+                  selectedSession?._id === session?._id && "border-primary border"
                 )}
                 key={session._id}
               >

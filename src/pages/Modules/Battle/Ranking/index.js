@@ -23,7 +23,7 @@ const columns = [
       <div className="flex items-center font-normal space-x-2">
         <img
           className="inline-block w-10 h-10 mr-4 rounded-full"
-          src="https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
+          src={user?.picture}
           alt=""
         />
         <div>{user.firstName}</div>
