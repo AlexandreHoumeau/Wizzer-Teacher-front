@@ -1,7 +1,7 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import api from 'services/api'
 import List from './list'
+import classNames from 'classnames'
 
 const Users = () => {
   const [userList, setUserList] = useState([])
@@ -23,6 +23,12 @@ const Users = () => {
   }
 
   useEffect(() => {
+    if (!keyword) {
+      fetchUsers()
+    }
+  }, [keyword])
+
+  useEffect(() => {
     fetchUsers()
   }, [])
   return (
@@ -35,7 +41,11 @@ const Users = () => {
         <input onChange={(e) => setKeyword(e.target.value)} placeholder="Chercher un étudiant" className='p-2 w-full' />
         <button className="bg-primary text-white py-2 px-4 rounded">Rechercher</button>
       </form>
-      <List users={userList} />
+      {userList.length > 0 ? (
+        <List users={userList} />
+      ): (
+        <div>Aucun utilisateur trouvé</div>
+      )}
     </div>
   )
 }

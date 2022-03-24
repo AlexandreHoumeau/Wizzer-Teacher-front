@@ -47,6 +47,7 @@ const ModuleOverview = () => {
       )
     },
   ];
+
   const [module, setModule] = useState();
   const [moduleID, setModuleID] = useState();
   const history = useHistory();
