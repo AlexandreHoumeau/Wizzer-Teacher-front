@@ -6,7 +6,6 @@ export default function Table({ columns, loading, dataSource, ...props }) {
 
   useEffect(() => {
     const temp = [...dataSource];
-    console.log(temp)
     setDatas(temp);
   }, [dataSource]);
 

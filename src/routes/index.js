@@ -42,6 +42,7 @@ const routes = [
   {
     path: "/modules/:moduleId",
     component: ModulesUserOverview,
+    goBack: true
   },
   {
     path: "/modules/:moduleId/:testId",
