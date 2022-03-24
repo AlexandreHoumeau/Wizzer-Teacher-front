@@ -1,4 +1,3 @@
-import Unauthorized from "pages/Shared/Unauthorized";
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { isLogin } from "utils/isLogin";
@@ -20,15 +19,22 @@ const PrivateRoute = ({
     <Route
       {...rest}
       render={(props) =>
-        hasRoles(roles) ? (
-          <>
-            {goBack && <div onClick={() => history.goBack()} className="cursor-pointer mb-10">
-              <LeftArrowIcon fontWeight={800} />
-              </div>}
-            <Component {...props} />
-          </>
-        ) : isLogin() ? (
-          <Redirect to="/app/home" />
+        isLogin() ? (
+          hasRoles(roles) ? (
+            <>
+              {goBack && (
+                <div
+                  onClick={() => history.goBack()}
+                  className="cursor-pointer mb-10"
+                >
+                  <LeftArrowIcon fontWeight={800} />
+                </div>
+              )}
+              <Component {...props} />
+            </>
+          ) : (
+            <Redirect to="/app/home" />
+          )
         ) : (
           <Redirect to="/login" />
         )
