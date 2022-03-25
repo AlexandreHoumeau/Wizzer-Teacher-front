@@ -31,10 +31,8 @@ const Banner = ({ todayExercices }) => {
         <div className="col-span-1">
           <div className="font-bold text-4xl">{banner.title}</div>
           <div className="text-grey-dark text-lg mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            consequat, lacus, pellentesque pellentesque quis auctor. Mauris enim
-            mi sagittis odio sapien. Nec ac consectetur a mattis quam aenean
-            est.
+            Lorqu'une battle est en cours, les exercices "libres" ne sont pas accessibles.<br/>
+            Vous devez attendre la fin de la battle pour pouvoir accèder aux exercices "libres". En attendant vous pouvez participer à la battle en cours.
           </div>
           <div>
             <div className="mt-10 flex items-center">

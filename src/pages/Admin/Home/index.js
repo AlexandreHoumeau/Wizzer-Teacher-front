@@ -82,16 +82,17 @@ const Home = () => {
 
       <div className="grid space-x-4 grid-cols-2 mt-10">
         <div>
-          {tests?.length > 0 && (
-            <div>
-              <div className="font-semibold text-3xl mb-5">
-                Exercices à corriger
-              </div>
-              <div className="bg-grey-light rounded p-5">
+          <div>
+            <div className="font-semibold text-3xl mb-5">
+              Exercices à corriger
+            </div>
+            <div className="bg-grey-light rounded p-5">
+              {tests?.length ? (
                 <div className="bg-white rounded space-y-4 p-5">
                   {tests.map((test, index) => (
                     <div
-                      className="bg-white rounded grid grid-cols-3 space-x-4"
+                      onClick={() => history.push(`/app/admin/modules/${test.moduleId}`)}
+                      className="bg-white cursor-pointer rounded grid grid-cols-3 space-x-4"
                       key={test.moduleId}
                     >
                       <div className="col-span-1 font-semibold">
@@ -111,9 +112,11 @@ const Home = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              ) : (
+                <div className="text-grey-dark italic text-center">Pas d'exercice à corriger</div>
+              )}
             </div>
-          )}
+          </div>
         </div>
 
         <div>
@@ -134,28 +137,28 @@ const Home = () => {
         </div>
 
         <div className="mt-10">
-          <div className="font-semibold text-3xl mb-5">Battle classement</div>
+          <div className="font-semibold text-3xl mb-5">Participation aux modules</div>
           <div className="bg-grey-light justify-center flex max-h-96 overflow-scroll space-y-4 p-5 rounded">
             {chartData?.length > 0 && (
               <div className="bg-white p-5 rounded">
-              <BarChart
-                width={500}
-                height={300}
-                data={chartData}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="value" fill="#ECF0FD" />
-              </BarChart>
+                <BarChart
+                  width={500}
+                  height={300}
+                  data={chartData}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="value" fill="#ECF0FD" />
+                </BarChart>
               </div>
             )}
           </div>

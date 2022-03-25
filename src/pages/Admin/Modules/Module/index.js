@@ -151,9 +151,10 @@ const ModuleOverview = () => {
         />
       </div>
       {module && <Table dataSource={exercices} columns={columns} />}
-
+      
       <div className="mt-10 font-raleway">
         <div className="font-raleway mb-5 font-bold text-3xl">Exercice(s) à corriger</div>
+        <div className="border rounded">
         <div className="grid font-semibold text-grey-dark grid-cols-5 rounded-t border-b-2 bg-grey-light pl-3 p-2">
           <div>Exercice</div>
           <div>Utilisateur</div>
@@ -197,8 +198,9 @@ const ModuleOverview = () => {
             </div>
           ))
         ) : (
-          <div>Aucun exercices à corriger</div>
+          <div className="text-center text-grey-dark bg-grey-light rounded-b py-2 font-semibold italic">Aucun exercices à corriger</div>
         )}
+        </div>
       </div>
     </div>
   );

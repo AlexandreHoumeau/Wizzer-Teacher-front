@@ -30,14 +30,17 @@ const routes = [
   {
     path: "/modules/battle",
     component: BattleOverview,
+    goBack: true
   },
   {
     path: "/modules/battle/:exerciceId",
+    goBack: true,
     component: BattleExercice,
   },
   {
     path: "/modules/battle/old/:battleId",
     component: BattleRank,
+    goBack: true,
   },
   {
     path: "/modules/:moduleId",

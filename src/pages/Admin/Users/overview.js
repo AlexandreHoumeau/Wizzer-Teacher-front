@@ -1,4 +1,6 @@
-import { Button, PieChart } from "components/ui";
+import { GithubIcon } from "assets/icons";
+import classNames from "classnames";
+import { Button, PieChart, Select } from "components/ui";
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
@@ -7,26 +9,57 @@ import { useParams } from "react-router-dom";
 import api from "services/api";
 
 const UserOverview = () => {
-  const history = useHistory()
+  const history = useHistory();
   const { userId } = useParams();
   const [user, setUser] = useState();
   const [stats, setStats] = useState();
   const [displayModal, setDisplayModal] = useState(false);
   const [graphStats, setGraphStats] = useState();
+  const [tests, setTests] = useState([]);
 
+  const [params] = useState({
+    $filter: {
+      _user: userId,
+      status: { $in: ["pending", null] },
+    },
+    $populate: [
+      {
+        path: "_module",
+        select: "title",
+      },
+      {
+        path: "_exercice",
+        select: "title points",
+      },
+      {
+        path: "_user",
+        select: "firstName lastName",
+      },
+    ],
+  });
   const removeUser = async () => {
     try {
-      await api.axios.delete(`/v1/users/${userId}`)
-      history.push('/app/admin/user')
-
+      await api.axios.delete(`/v1/users/${userId}`);
+      history.push("/app/admin/user");
     } catch (error) {}
-  }
+  };
 
   const fetchUser = async () => {
     try {
       const { user } = await api.axios.get(`/v1/users/${userId}`);
       setUser(user);
     } catch (error) {}
+  };
+
+  const fetchTests = async () => {
+    try {
+      const { tests } = await api.axios.get("/v1/tests", { params });
+      setTests(
+        tests.sort((a, b) =>
+          ("" + a._module.title).localeCompare(b._module.title)
+        )
+      );
+    } catch {}
   };
 
   const fetchStats = async () => {
@@ -36,16 +69,33 @@ const UserOverview = () => {
     } catch (error) {}
   };
 
+  const setPoints = (value, index) => {
+    let newArr = [...tests];
+    newArr[index].score = value;
+    setTests(newArr);
+  };
+
+  const correctTest = async (test) => {
+    try {
+      await api.axios.put(`/v1/tests/${test._id}`, { test });
+    } finally {
+      fetchTests();
+    }
+  };
+
   useEffect(() => {
-    setGraphStats([
-      { name: "Exercice(s) fait", value: stats?.exoDone },
-      { name: "Exercice(s) bon", value: stats?.goodExercices },
-    ]);
+    if (stats?.exoDone > 0 && stats?.goodExercices > 0) {
+      setGraphStats([
+        { name: "Exercice(s) fait", value: stats?.exoDone },
+        { name: "Exercice(s) bon", value: stats?.goodExercices },
+      ]);
+    }
   }, [stats]);
 
   useEffect(() => {
     fetchUser();
     fetchStats();
+    fetchTests();
   }, [userId]);
 
   return (
@@ -73,8 +123,68 @@ const UserOverview = () => {
                 <div>{user.email}</div>
               </div>
             </div>
-            <div onClick={() => setDisplayModal(true)} className="text-primary cursor-pointer font-semibold">
+            <div
+              onClick={() => setDisplayModal(true)}
+              className="text-primary cursor-pointer font-semibold"
+            >
               Supprimer l'utilisateur
+            </div>
+          </div>
+
+          <div className="mt-10 font-raleway">
+            <div className="font-raleway mb-5 font-bold text-3xl">
+              Exercice(s) à corriger de {user.firstName}
+            </div>
+            <div className="border rounded">
+              <div className="grid font-semibold text-grey-dark grid-cols-5 rounded-t border-b-2 bg-grey-light pl-3 p-2">
+                <div>Module</div>
+                <div>Exercice</div>
+                <div>Repo Github</div>
+                <div>Points de l'exercice</div>
+                <div>Action</div>
+              </div>
+              {tests.length > 0 ? (
+                tests.map((test, index) => (
+                  <div
+                    className={classNames(
+                      "p-2 grid grid-cols-5 items-center rounded",
+                      index % 2 === 0 ? "bg-grey-light" : ""
+                    )}
+                    key={test.id}
+                  >
+                    <div className="font-semibold">{test._module.title}</div>
+                    <div>{test._exercice.title}</div>
+                    <a
+                      className=""
+                      target="_blank"
+                      rel="noreferrer"
+                      href={test.repository}
+                    >
+                      <GithubIcon color="black" />
+                    </a>
+                    <Select
+                      action={(value) => setPoints(value, index)}
+                      className="w-2/3"
+                      placeholder="Point de l'exercice"
+                      values={Array.from(
+                        { length: test._exercice.points + 1 },
+                        (x, i) => i
+                      )}
+                    />
+                    <div className="flex">
+                      <Button
+                        action={() => correctTest(test)}
+                        type="primary"
+                        text="Valider"
+                      />
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center text-grey-dark bg-grey-light rounded-b py-2 font-semibold italic">
+                  Aucun exercices à corriger
+                </div>
+              )}
             </div>
           </div>
 
@@ -109,7 +219,7 @@ const UserOverview = () => {
                 Bonnes réponses de {user.firstName}
               </div>
               <div className="bg-grey-light pb-5 space-x-10 rounded-xl flex justify-center">
-                {graphStats && (
+                {graphStats ? (
                   <div className="items-baseline">
                     <PieChart data={graphStats} />
                     <div className="flex items-center space-x-8">
@@ -123,12 +233,18 @@ const UserOverview = () => {
                       </div>
                     </div>
                   </div>
+                ) : (
+                  <div className="text-grey-dark p-24 italic">
+                    Pas encore de réponse
+                  </div>
                 )}
               </div>
             </div>
           </div>
           <div className="">
-            <div className="text-3xl font-bold mb-8">Détail des modules de {user.firstName}</div>
+            <div className="text-3xl font-bold mb-8">
+              Détail des modules de {user.firstName}
+            </div>
             <div className="bg-grey-light p-8 rounded-xl max-h-96 overflow-scroll">
               {stats?.modulesParticipation?.map((module) => (
                 <div
@@ -154,11 +270,21 @@ const UserOverview = () => {
         contentLabel="Example Modal"
       >
         <div className="p-5 text-center font-raleway space-y-8">
-          <div className="text-3xl ">Êtes vous sur de vouloir supprimer cet utilisateur ?</div>
+          <div className="text-3xl ">
+            Êtes vous sur de vouloir supprimer cet utilisateur ?
+          </div>
           <div>Vous ne pourrez pas revenir en arrière.</div>
           <div className="flex justify-center space-x-4">
-            <Button type="primary" action={() => removeUser()} text="Supprimer" />
-            <Button type="black" action={() => setDisplayModal(false)} text="Annuler" />
+            <Button
+              type="primary"
+              action={() => removeUser()}
+              text="Supprimer"
+            />
+            <Button
+              type="black"
+              action={() => setDisplayModal(false)}
+              text="Annuler"
+            />
           </div>
         </div>
       </Modal>

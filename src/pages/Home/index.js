@@ -2,9 +2,11 @@ import { Button, PieChart, TagCourse } from "components/ui";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import api from "services/api";
 
 const Home = () => {
+  const history = useHistory()
   const [stats, setStats] = useState({});
   const [graphStats, setGraphStats] = useState();
   const [battle, setBattle] = useState();
@@ -29,10 +31,12 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setGraphStats([
-      { name: "Exercice(s) fait", value: stats.exoDone },
-      { name: "Exercice(s) bon", value: stats.goodExercices },
-    ]);
+    if (stats?.exoDone > 0 && stats?.goodExercices > 0) {
+      setGraphStats([
+        { name: "Exercice(s) fait", value: stats.exoDone },
+        { name: "Exercice(s) bon", value: stats.goodExercices },
+      ]);
+    }
   }, [stats]);
 
   useEffect(() => {
@@ -90,7 +94,7 @@ const Home = () => {
           <div>
             <div className="text-3xl font-bold mb-8">Vos bonnes réponses</div>
             <div className="bg-grey-light pb-5 space-x-10 rounded-xl flex justify-center">
-              {graphStats && (
+              {graphStats ? (
                 <div className="items-baseline">
                   <PieChart data={graphStats} />
                   <div className="flex items-center space-x-8">
@@ -104,6 +108,8 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
+              ) : (
+                <div className="text-grey-dark p-24 italic">Pas encore de réponse</div>
               )}
             </div>
           </div>
@@ -124,7 +130,7 @@ const Home = () => {
                 ))}
               </div>
               <div className="flex justify-center mt-10">
-                <Button type="primary" text="Voir les cours" />
+                <Button action={() => history.push('modules')} type="primary" text="Voir les cours" />
               </div>
             </div>
           </div>
@@ -153,7 +159,8 @@ const Home = () => {
                 Sur {battle?.rank?.length} participants, vous êtes classé
               </div>
               <div className=" mb-5 text-6xl text-primary font-semibold">
-                {battle?.userPosition}{battle?.userPosition === 1 ? 'er(e)' : 'ème'}
+                {battle?.userPosition}
+                {battle?.userPosition === 1 ? "er(e)" : "ème"}
               </div>
               <Button text="Voir les autres battles" type="primary" />
             </div>
