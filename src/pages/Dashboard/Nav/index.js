@@ -5,8 +5,10 @@ import { connect } from "react-redux";
 
 import * as Icons from "assets/icons";
 import routes from "routes/sidebar";
+import { useHistory } from "react-router";
 
 const Nav = ({ user }) => {
+  const history = useHistory();
   const [navigationList, setNavigationList] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -65,7 +67,7 @@ const Nav = ({ user }) => {
                     </NavLink>
                   ))}
                 </div>
-                <div className="flex">
+                <div className="flex cursor-pointer" onClick={() => history.push(`settings`)}>
                   <img
                     className="inline-block w-12 h-12 mr-4 rounded-full"
                     src="https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"

@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import DashboardLayout from "pages/Dashboard";
 import { Provider } from "react-redux";
 import Store from "./store";
+import Landing from "pages/Landing";
 
 export default function App() {
   return (
@@ -20,6 +21,12 @@ export default function App() {
       <ToastContainer />
       <BrowserRouter>
         <Switch>
+          <PublicRoute
+            restricted={false}
+            component={Landing}
+            path="/"
+            exact
+          />
           <PublicRoute
             restricted={false}
             component={Login}
