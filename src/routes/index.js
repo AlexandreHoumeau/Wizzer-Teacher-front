@@ -17,6 +17,7 @@ const ModuleOverview = lazy(() => import("pages/Admin/Modules/Module"));
 const NewCourse = lazy(() => import("pages/Admin/Modules/Module/New"));
 const EditCourse = lazy(() => import("pages/Admin/Modules/Module/Edit"));
 const Session = lazy(() => import("pages/Admin/Sessions"));
+const Settings = lazy(() => import("pages/Settings"));
 
 const routes = [
   {
@@ -100,6 +101,10 @@ const routes = [
     path: "/admin/battle",
     component: Session,
     roles: ["admin"],
+  },
+  {
+    path: "/settings",
+    component: Settings,
   },
   {
     path: "/admin/battle/history",
