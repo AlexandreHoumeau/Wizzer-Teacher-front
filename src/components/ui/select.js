@@ -1,8 +1,9 @@
+import classNames from "classnames";
 import React from "react";
 
-const Select = ({ action, label, placeholder, values, value }) => {
+const Select = ({ action, label, placeholder, values, value, className }) => {
   return (
-    <label className="block border-b-2  border-grey-dark text-left">
+    <label className={classNames("block border-b-2  border-grey-dark text-left", className)}>
       <p className=" font-raleway text-base text-grey-dark font-medium">
         {label}
       </p>

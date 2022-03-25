@@ -10,8 +10,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import Dragitem from "components/admin";
 import DropItem from "components/admin/DropItem";
 import { Button } from "components/ui";
+import { useHistory } from "react-router-dom";
 
 const Session = () => {
+  const history = useHistory()
   const [exercices, setExercices] = useState();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -35,7 +37,6 @@ const Session = () => {
   const fetchSession = async () => {
     const data = await api.axios.get("v1/session");
     if (data?.session?.days) {
-      console.log(data);
       setFetchedId(data.session._id);
       setFetchedDays(data.session.days);
       setStartDate(new Date(data.startAt));
@@ -57,7 +58,14 @@ const Session = () => {
   };
 
   const removeSession = async () => {
-    await api.axios.delete(`v1/session/${fetchedId}`)
+    try {
+      await api.axios.delete(`v1/session/${fetchedId}`)
+      setFetchedId(null)
+      setFetchedDays(null)
+      setStartDate(null)
+      setDays([])
+      setEndDate(null);
+    } catch (error) {}
   }
 
   const removeCourse = (item, index) => {
@@ -108,7 +116,10 @@ const Session = () => {
   return (
     <div>
       <div className="mb-10">
-        <div className="font-bold text-3xl mb-3">Durée</div>
+        <div className="flex justify-between items-center">
+          <div className="font-bold text-3xl mb-3">Durée</div>
+          <div onClick={() => history.push('/app/admin/battle/history')}  className="text-waiting underline cursor-pointer text-xl">Historique des battles</div>
+        </div>
         <ReactDatePicker
           disabled={fetchedDays?.length}
           className="border font-raleway rounded bg-grey-light p-3 w-1/5"

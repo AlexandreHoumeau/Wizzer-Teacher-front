@@ -14,6 +14,7 @@ import DashboardLayout from "pages/Dashboard";
 import { Provider } from "react-redux";
 import Store from "./store";
 import Landing from "pages/Landing";
+import Password from "pages/Auth/Password";
 
 export default function App() {
   return (
@@ -35,13 +36,19 @@ export default function App() {
           />
           <PublicRoute
             restricted={false}
+            component={Password}
+            path="/password"
+            exact
+          />
+          <PublicRoute
+            restricted={false}
             component={Register}
             path="/register"
             exact
           />
-            <PrivateRoute component={DashboardLayout} path="/app" />
+          <PrivateRoute component={DashboardLayout} path="/app" />
         </Switch>
       </BrowserRouter>
-      </Provider>
+    </Provider>
   );
-};
+}

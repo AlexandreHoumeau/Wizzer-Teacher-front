@@ -5,6 +5,7 @@ const ModulesUser = lazy(() => import("../pages/Modules"));
 const ModulesUserOverview = lazy(() => import("../pages/Modules/Module"));
 const BattleOverview = lazy(() => import("../pages/Modules/Battle"));
 const BattleExercice = lazy(() => import("../pages/Modules/Battle/Exercice"));
+const BattleAdmin = lazy(() => import('../pages/Admin/Sessions/History'))
 const BattleRank = lazy(() => import("../pages/Modules/Battle/Ranking"));
 const TestOverview = lazy(() => import("../pages/Modules/Test"));
 const AdminHome = lazy(() => import("../pages/Admin/Home/index"));
@@ -42,6 +43,7 @@ const routes = [
   {
     path: "/modules/:moduleId",
     component: ModulesUserOverview,
+    goBack: true
   },
   {
     path: "/modules/:moduleId/:testId",
@@ -59,11 +61,13 @@ const routes = [
   },
   {
     path: "/admin/user/:userId",
+    goBack: true,
     component: AdminUserOverview,
     roles: ["admin"],
   },
   {
     path: "/admin/modules/new",
+    goBack: true,
     component: NewModule,
     roles: ["admin"],
   },
@@ -74,21 +78,24 @@ const routes = [
   },
   {
     path: "/admin/modules/:id",
+    goBack: true,
     component: ModuleOverview,
     roles: ["admin"],
   },
   {
     path: "/admin/modules/:id/new",
+    goBack: true,
     component: NewCourse,
     roles: ["admin"],
   },
   {
     path: "/admin/modules/:id/edit/:exerciceId",
+    goBack: true,
     component: EditCourse,
     roles: ["admin"],
   },
   {
-    path: "/admin/session",
+    path: "/admin/battle",
     component: Session,
     roles: ["admin"],
   },
@@ -99,6 +106,10 @@ const routes = [
   {
     path: "/settings/signin/callback",
     component: Settings,
+    path: "/admin/battle/history",
+    goBack: true,
+    component: BattleAdmin,
+    roles: ["admin"],
   },
 ];
 

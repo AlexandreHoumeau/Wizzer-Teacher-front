@@ -56,7 +56,7 @@ const Home = () => {
               Les exercices du jour
             </div>
             <div
-              onClick={() => history.push("/app/admin/session")}
+              onClick={() => history.push("/app/admin/battle")}
               className="cursor-pointer text-xl text-primary font-semibold"
             >
               Modifier

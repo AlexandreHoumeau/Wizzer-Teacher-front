@@ -14,13 +14,31 @@ const ModuleOverview = () => {
   const [module, setModule] = useState();
   const [exercices, setExercices] = useState([]);
   const { moduleId } = useParams();
-
+  const [params] = useState({
+    $filter: {
+      _module: moduleId
+    },
+    $populate: [
+      {
+        path: "_module",
+        select: "title",
+      }, {
+        path: "_tests"
+      }
+    ],
+  })
   const fetchModule = async () => {
-    const data = await api.axios.get(`/v1/user/modules/${moduleId}`);
-    if (data?.module) {
-      setModule(data.module);
-      setExercices(data.exercices);
-    }
+    try {
+      const { exercices } = await api.axios.get('/v1/user/exercice', { params })
+      console.log(exercices)
+      setExercices(exercices)
+      setModule(exercices[0].module)
+    } catch (error) {}
+    // const data = await api.axios.get(`/v1/user/modules/${moduleId}`);
+    // if (data?.module) {
+    //   setModule(data.module);
+    //   setExercices(data.exercices);
+    // }
   };
   
   const handleSublmit = async (exerciceId) => {
@@ -58,9 +76,8 @@ const ModuleOverview = () => {
   };
 
   const renderStatus = (status) => {
-    console.log(status)
     switch (status) {
-      case "accepted":
+      case "passed":
         return <SuccesIcon />;
 
       case "refused":
@@ -70,7 +87,7 @@ const ModuleOverview = () => {
         return <WaitingIcon className=""/>;
 
       default:
-        return <div />;
+        return <WaitingIcon className=""/>;
     }
   };
 
@@ -86,16 +103,10 @@ const ModuleOverview = () => {
             <div className="flex justify-between">
               <div className="flex items-center">
                 <div className="text-2xl font-semibold mr-4">
-                  Module: {module.title}
+                  Module: {module}
                 </div>
-                <div className="flex">
-                  <TagCourse
-                    type={module._exercices.length === 0 ? "error" : "primary"}
-                    title={`${module._exercices.length} cours`}
-                  />
-                </div>
+
               </div>
-              <Progress total={module._exercices.length} current={0} />
             </div>
           </div>
 

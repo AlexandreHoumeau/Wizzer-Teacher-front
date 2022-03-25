@@ -19,7 +19,6 @@ const Modules = () => {
       design,
     });
   };
-  
 
   useEffect(() => {
     fetchModules();
@@ -45,7 +44,7 @@ const Modules = () => {
           </div>
           <div className="flex w-full overflow-y-auto mt-10 pb-4">
             {modules.design.map((module) => (
-              <CardModule module={module} />
+              <CardModule key={module._id} module={module} />
             ))}
           </div>
         </div>
@@ -68,7 +67,7 @@ const Modules = () => {
           </div>
           <div className="flex w-full overflow-y-auto mt-10 pb-4">
             {modules.dev.map((module) => (
-              <CardModule module={module} />
+              <CardModule key={module._id} module={module} />
             ))}
           </div>
         </div>

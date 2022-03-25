@@ -3,7 +3,7 @@ import React from "react";
 import { useDrag } from "react-dnd";
 
 const Dragitem = ({ exercice }) => {
-  const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
+  const [{ isDragging }, drag] = useDrag(() => ({
     type: "BOX",
     item: {
       ...exercice,
