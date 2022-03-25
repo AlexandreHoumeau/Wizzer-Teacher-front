@@ -104,8 +104,6 @@ const routes = [
     component: Settings,
   },
   {
-    path: "/settings/signin/callback",
-    component: Settings,
     path: "/admin/battle/history",
     goBack: true,
     component: BattleAdmin,
